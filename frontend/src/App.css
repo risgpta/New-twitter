@@ -1,0 +1,68 @@
+.App{
+  display: flex;
+}
+
+.AppInfo{
+  flex-basis : 50%;
+  background-color:#333033;
+  height: 100vh;
+  color:white;
+  margin:auto;
+}
+
+.Info{
+  margin: auto;
+  margin-top: 50vh;
+  width: 40vmin;
+  font-size: 35px;
+}
+
+.Sign{
+  flex-basis : 50%;
+}
+
+.signup{
+  display: block;
+  padding: 20px;
+  border: 1px solid;
+  border-radius: 25px;
+  width: 50vmin;
+  margin: auto;
+  margin-top:50px;
+  background-color: #333033;
+  color:white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login{
+  display: block;
+  padding: 20px;
+  border: 1px solid;
+  border-radius: 25px;
+  width: 50vmin;
+  margin: auto;
+  margin-top:50px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup:hover{
+  background-color: white;
+  color: #3330336b;
+}
+
+.login:hover{
+  background-color: #3330336b;
+  color:white;
+}
+
+.signup:focus{
+  background-color: white;
+  color: #0f0e0f6b;
+  outline: none;
+}
+
+.login:focus{
+  outline: none;
+}
