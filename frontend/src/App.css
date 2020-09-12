@@ -23,28 +23,30 @@
 
 .signup{
   display: block;
-  padding: 20px;
+  padding: 15px;
   border: 1px solid;
   border-radius: 25px;
   width: 50vmin;
   margin: auto;
-  margin-top:50px;
+  margin-top:10vmax;
   background-color: #333033;
   color:white;
   font-size: 16px;
   cursor: pointer;
+  outline: none;
 }
 
 .login{
   display: block;
-  padding: 20px;
+  padding: 15px;
   border: 1px solid;
   border-radius: 25px;
   width: 50vmin;
   margin: auto;
-  margin-top:50px;
+  margin-top:10px;
   font-size: 16px;
   cursor: pointer;
+  outline: none;
 }
 
 .signup:hover{
@@ -57,12 +59,51 @@
   color:white;
 }
 
-.signup:focus{
+
+
+.modalStyle{
+  width: 70vmin;
+  height: fit-content;
+  margin: auto;
   background-color: white;
-  color: #0f0e0f6b;
-  outline: none;
+  border: 1px solid #3330336b;
+  border-radius: 20px;
+  margin-top: 5vmax;
+  outline:none;
 }
 
-.login:focus{
+.formStyle{
+  padding: 20px 60px;
+}
+
+.formStyle > label{
+  display: block;
+  margin-top: 10px;
+  color:#333033;
+  font-style: italic;
+}
+
+.formStyle > input{
+  display: block;
+  margin-top: 10px;
+  background-color:#1b1a1b0a;
+  width: 50vmin;
+  height: 5vmin;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid;
+}
+
+.smallbtn{
+  display: block;
+  padding: 8px;
+  border: 1px solid;
+  border-radius: 25px;
+  width: 12vmin;
+  margin: auto;
+  margin-top: 30px;;
+  cursor: pointer;
+  background-color: #333033;
+  color:white;
   outline: none;
 }
