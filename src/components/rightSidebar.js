@@ -3,7 +3,7 @@ import '../App.css';
 const RightSidebar = () => {
     return(
         <div className="rightSidebar">
-            <input className="searchTweet" placeholder="Search new Twitter"/>
+            <input className="searchTweet" placeholder="Search New Twitter"/>
         </div>
     );
 }

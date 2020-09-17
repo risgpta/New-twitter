@@ -112,12 +112,13 @@
   height:7vmin;
   display: flex;
   border: 1px solid  rgb(31 22 24 / 7%);
+  padding:20px;
 }
 .headerContent{
   flex-basis: 85%;
   padding:15px;
-  font-size: 20px;
-  font-weight:700;
+  font-size: 30px;
+  font-weight:bolder;
 }
 .header > img{
   flex-basis: 15%;
@@ -162,6 +163,7 @@
   width: -webkit-fill-available;
   border: 2px solid  rgb(31 22 24 / 7%);
   padding:20px;
+  font-size: 25px;
 }
 
 .tweet{
@@ -222,4 +224,19 @@
   padding: 10px;
   border-radius: 20px;
   outline: none;
+}
+
+.smallbtn2{
+  display: block;
+  padding: 8px;
+  border: 1px solid;
+  border-radius: 25px;
+  width: 14vmin;
+  margin: auto;
+  margin-top: 30px;;
+  cursor: pointer;
+  background-color: #333033;
+  color:white;
+  outline: none;
+  font-size: 17px;
 }

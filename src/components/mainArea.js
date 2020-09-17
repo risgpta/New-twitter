@@ -105,7 +105,7 @@ const MainArea = () => {
         <div className="mainArea">
             <form>
             <textarea id="tweetContent" name="content" rows="5"  placeholder="What's happening?" className="textArea"></textarea>
-            <input className="smallbtn" onClick={e => postTweet(e)} type="submit" value="Tweet"/>
+            <input className="smallbtn2" onClick={e => postTweet(e)} type="submit" value="Tweet"/>
             </form>
             <TweetList/>
         </div>
