@@ -4,7 +4,7 @@
 
 .AppInfo{
   flex-basis : 50%;
-  background-color:#333033;
+  background: linear-gradient(#333033, #130606);
   height: 100vh;
   color:white;
   margin:auto;
@@ -87,7 +87,7 @@
   display: block;
   margin-top: 10px;
   background-color:#1b1a1b0a;
-  width: 50vmin;
+  width: 55vmin;
   height: 5vmin;
   outline: none;
   border: none;
@@ -105,5 +105,121 @@
   cursor: pointer;
   background-color: #333033;
   color:white;
+  outline: none;
+}
+
+.header{
+  height:7vmin;
+  display: flex;
+  border: 1px solid  rgb(31 22 24 / 7%);
+}
+.headerContent{
+  flex-basis: 85%;
+  padding:15px;
+  font-size: 20px;
+  font-weight:700;
+}
+.header > img{
+  flex-basis: 15%;
+}
+.dashboard{
+  display: flex;
+  
+}
+
+.sidebar{
+  flex-basis: 15%;
+  background-color: rgb(31 22 24 / 7%);
+  height: 100vmax;
+}
+.mainArea{
+  flex-basis: 70%;
+  height: 100vmax;
+}
+.rightSidebar{
+  flex-basis: 15%;
+  background-color: rgb(31 22 24 / 3%);
+  height: 100vmax;
+}
+.sidebarOptions
+{
+  padding: 15px;
+  border: 1px solid;
+  border-radius: 25px;
+  width: fit-content;
+  margin: auto;
+  margin-top:16px;
+  background-color: #333033;
+  color:white;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+.textArea{
+  font-size: 16px;
+  display: inline-block;
+  width: -webkit-fill-available;
+  border: 2px solid  rgb(31 22 24 / 7%);
+  padding:20px;
+}
+
+.tweet{
+  display: block;
+  width: 65vmax;
+  margin: auto;
+  border:1px solid rgb(31 22 24 / 27%);
+  height: fit-content;
+  padding: 20px;
+  margin-top:30px;
+  border-radius: 15px;
+}
+
+.aboveTweet{
+  display: flex;
+  background-color: rgba(250, 250, 250, 0.863);
+  border-radius: 15px;
+  padding: 10px;
+}
+.user{
+  flex:1;
+  font-size: 20px;
+  font-weight: bold;
+  color:#333033;
+}
+
+.user>img{
+  vertical-align: text-bottom;
+  padding: 1px 10px;
+}
+
+.tweetContent{
+  padding: 20px;
+  font-size: 25px;
+  margin-top: 30px;
+}
+
+.likes{
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.likes > img{
+  vertical-align: text-bottom;
+  padding: 1px 10px;
+}
+.tweetTime{
+  font-weight: bold;
+}
+
+.searchTweet{
+  display: block;
+  margin: auto;
+  margin-top:50px;
+  font-size: 20px;
+  width: 200px;
+  border:2px solid;
+  padding: 10px;
+  border-radius: 20px;
   outline: none;
 }
