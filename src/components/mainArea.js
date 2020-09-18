@@ -1,14 +1,20 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import { useCookies } from 'react-cookie';
 import { useSnackbar } from 'react-simple-snackbar';
 import { Redirect } from 'react-router';
 
+import {UtilsContext} from '../contexts/utils';
+
 import '../App.css';
 
+import MyTweetList from './mytweetList';
 import TweetList from './tweetList';
 import Tweet from './tweet';
 
 const MainArea = () => {
+
+  const {mytweet} = useContext(UtilsContext);
+
     const options = {
         position: 'bottom-right',
         style: {
@@ -95,8 +101,9 @@ const MainArea = () => {
                 console.error('There was an error!', data);
               })
           });
+          setTweet(null);
         }
-      },[tweet])
+      },[tweet,mytweet])
 
 
     if(!cookies.Token)
@@ -107,7 +114,7 @@ const MainArea = () => {
             <textarea id="tweetContent" name="content" rows="5"  placeholder="What's happening?" className="textArea"></textarea>
             <input className="smallbtn2" onClick={e => postTweet(e)} type="submit" value="Tweet"/>
             </form>
-            <TweetList/>
+            {mytweet ? <MyTweetList/> : <TweetList/>}
         </div>
     );
 }

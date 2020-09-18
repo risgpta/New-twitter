@@ -67,9 +67,12 @@ const optionsError = {
         console.log(data); 
         if(response.status === 200)
         {
-            openSnackbar('Logged In successfully');
-            setCookie('Token', data.token, { path: '/' });
-            setTimeout(() => SetLoggedIn(true),1000);
+          openSnackbar('Logged In successfully');
+            setTimeout(() => {
+              setCookie('Token', data.token, { path: '/' });
+              setCookie('Username', logindata.username, { path: '/' });
+              SetLoggedIn(true)
+            },2000);
         }
         else
         {

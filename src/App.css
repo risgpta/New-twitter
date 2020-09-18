@@ -101,7 +101,7 @@
   border-radius: 25px;
   width: 12vmin;
   margin: auto;
-  margin-top: 30px;;
+  margin-top: 30px;
   cursor: pointer;
   background-color: #333033;
   color:white;
@@ -131,16 +131,16 @@
 .sidebar{
   flex-basis: 15%;
   background-color: rgb(31 22 24 / 7%);
-  height: 100vmax;
+  height: 100vh;
 }
 .mainArea{
   flex-basis: 70%;
-  height: 100vmax;
+  height: 100vh;
 }
 .rightSidebar{
   flex-basis: 15%;
+  height: 100vh;
   background-color: rgb(31 22 24 / 3%);
-  height: 100vmax;
 }
 .sidebarOptions
 {
@@ -175,6 +175,7 @@
   padding: 20px;
   margin-top:30px;
   border-radius: 15px;
+  margin-bottom: 40px;
 }
 
 .aboveTweet{
@@ -199,11 +200,14 @@
   padding: 20px;
   font-size: 25px;
   margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .likes{
   font-size: 30px;
   margin-top: 20px;
+  border-top: 1px solid rgba(206, 209, 201, 0.644);
+  padding: 10px;
 }
 
 .likes > img{
@@ -233,10 +237,37 @@
   border-radius: 25px;
   width: 14vmin;
   margin: auto;
-  margin-top: 30px;;
+  margin-top: 30px;
   cursor: pointer;
   background-color: #333033;
   color:white;
   outline: none;
   font-size: 17px;
+}
+
+.message{
+  display: block;
+  margin: auto;
+  margin-top:50px;
+  font-size: 20px;
+  width: 200px;
+  border:2px solid;
+  padding: 10px;
+  border-radius: 20px;
+  outline: none;
+}
+
+.deletebtn{
+  padding: 8px;
+  border: 1px solid;
+  border-radius: 25px;
+  width: 14vmin;
+  margin: auto;
+  cursor: pointer;
+  background-color: #333033;
+  color:white;
+  outline: none;
+  font-size: 17px;
+  text-align: center;
+  float:right;
 }

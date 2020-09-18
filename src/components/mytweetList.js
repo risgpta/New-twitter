@@ -5,7 +5,7 @@ import '../App.css';
 
 import Tweet from './tweet';
 
-const TweetList = (params) => {
+const MyTweetList = (params) => {
 
     const [cookies, setCookie] = useCookies();
     const [refresh,setRefresh] = useState(true);
@@ -14,13 +14,13 @@ const TweetList = (params) => {
 
     const request = {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json','Authorization':'Token '+cookies.Token},
       };
     
       useEffect(() => {
         if(refresh)
         {
-          fetch('https://twitter-clone-mukul.herokuapp.com/alltweets/',request)
+          fetch('https://twitter-clone-mukul.herokuapp.com/mytweet/',request)
           .then(response => {
             console.log(response);
             const responseJson = response.json().then(data => {
@@ -57,7 +57,7 @@ const TweetList = (params) => {
     return(
         <div>
              {tweets.slice(0).reverse().map(tweet => {
-            return <Tweet key={tweet.id} id={tweet.id} content={tweet.content} likes={tweet.likes} upd={tweet.updation_date} user={tweet.user.username} />;
+            return <Tweet id={tweet.id} key={tweet.id} content={tweet.content} likes={tweet.likes} upd={tweet.updation_date} user={tweet.user.username} />;
           })}
         </div>
     );
@@ -65,4 +65,4 @@ const TweetList = (params) => {
 }
 
 
-export default TweetList;
+export default MyTweetList;
