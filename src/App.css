@@ -132,15 +132,32 @@
   flex-basis: 15%;
   background-color: rgb(31 22 24 / 7%);
   height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 .mainArea{
   flex-basis: 70%;
   height: 100vh;
+  overflow-y: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+.mainArea::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.mainArea {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
 .rightSidebar{
   flex-basis: 15%;
-  height: 100vh;
   background-color: rgb(31 22 24 / 3%);
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 .sidebarOptions
 {
