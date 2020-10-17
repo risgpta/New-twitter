@@ -9,12 +9,11 @@ import '../App.css';
 
 import MyTweetList from './mytweetList';
 import TweetList from './tweetList';
-import Tweet from './tweet';
+import Loader from './loader';
 
 const MainArea = () => {
 
-  const {mytweet} = useContext(UtilsContext);
-
+  const {mytweet,editTweet,setEditTweet,editTweetContent,setEditTweetContent,editTweetLikes,setEditTweetLikes,loader,setLoader} = useContext(UtilsContext);
     const options = {
         position: 'bottom-right',
         style: {
@@ -51,32 +50,95 @@ const MainArea = () => {
     const [openErrSnackbar, closeErrSnackbar] = useSnackbar(optionsError);
     const [cookies, setCookie] = useCookies();
     const [tweet,setTweet] = useState(null);
+    const [editData,setEditData] = useState(null);
+
+    const editRequest = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json','Authorization':'Token '+cookies.Token},
+      body: JSON.stringify(editData)
+    };
+
 
     const postTweet = (e) =>{
         e.preventDefault();
         let data = {};
-        data['content'] = document.getElementById('tweetContent').value;
-        setTweet(data);
-        console.log(data);
+        let form_data = new FormData();
+        form_data.append('content', document.getElementById('tweetContent').value);
+        form_data.append('image', document.getElementById('postImage').files[0]);
+
+        if(editTweetContent){
+          data['likes'] = editTweetLikes;
+            console.log(data);
+            setEditData(data);
+        }
+        else{
+          console.log(document.getElementById('postImage').files[0]);
+          setTweet(form_data);
+        }
     }
 
     const request = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json','Authorization':'Token '+cookies.Token},
-        body: JSON.stringify(tweet)
+        headers: {'Authorization':'Token '+cookies.Token},
+        body: tweet
       };
     
       useEffect(() => {
         if(tweet!=null)
         {
+          setLoader(true);
           fetch('https://twitter-clone-mukul.herokuapp.com/mytweet/',request)
+          .then(response => {
+            console.log(response);
+            if(response.status === 201)
+            {
+                console.log(response);
+                setLoader(false);
+                openSnackbar('POSTED!');
+                document.getElementById('tweetContent').value = '';
+                setTweet(null)
+            }
+            else
+            {
+                let res = '';
+                console.log(response);
+                for(let key in response)
+                {
+                    res=res+key+','+response[key]+'.';
+                }
+                openErrSnackbar(res);
+            }
+          })
+          .catch(error => {
+                console.log(error );
+                let res = '';
+                for(let key in error )
+                {
+                    res=res+key+','+error [key]+'.';
+                }
+                openErrSnackbar(res);
+                console.error('There was an error!',error );
+          });
+        }
+
+        if(editTweet !=null)
+        { 
+          document.getElementById('tweetContent').scrollIntoView({behavior:"smooth"})
+          document.getElementById('tweetContent').value = editTweetContent;
+        }
+
+        if(editData !=null)
+        {
+          setLoader(true);
+          fetch('https://twitter-clone-mukul.herokuapp.com/mytweet/update/'+editTweet+'/',editRequest)
           .then(response => {
             console.log(response);
             const responseJson = response.json().then(data => {
             console.log(data); 
-            if(response.status === 201)
+            if(response.status === 200)
             {
-                openSnackbar('POSTED!');
+                setLoader(false);
+                openSnackbar('Edited!');
             }
             else
             {
@@ -101,18 +163,27 @@ const MainArea = () => {
                 console.error('There was an error!', data);
               })
           });
-          setTweet(null);
+          setEditTweet(null);
+          setEditTweetContent(null);
+          setEditData(null);
+          setEditTweetLikes(null);
+          document.getElementById('tweetContent').value = '';
         }
-      },[tweet,mytweet])
+
+      },[tweet,mytweet,editTweet,editData])
 
 
     if(!cookies.Token)
     return <Redirect to='/'/>
     return(
-        <div className="mainArea">
+        <div id="main" className="mainArea">
+          <Loader/>
             <form>
             <textarea id="tweetContent" name="content" rows="5"  placeholder="What's happening?" className="textArea"></textarea>
-            <input className="smallbtn2" onClick={e => postTweet(e)} type="submit" value="Tweet"/>
+            <input type="file"
+                   id="postImage"
+                    />
+            <input className="smallbtn2" onClick={e => postTweet(e)} type="submit" value={editTweetContent ? 'Edit Tweet' : 'Tweet'}/>
             </form>
             {mytweet ? <MyTweetList/> : <TweetList/>}
         </div>

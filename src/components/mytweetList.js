@@ -1,8 +1,9 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useContext} from 'react';
 import { useCookies } from 'react-cookie';
 
 import '../App.css';
 
+import {UtilsContext} from '../contexts/utils';
 import Tweet from './tweet';
 
 const MyTweetList = (params) => {
@@ -11,6 +12,8 @@ const MyTweetList = (params) => {
     const [refresh,setRefresh] = useState(true);
 
     const [tweets,setTweets] = useState([]);
+    const {loader,setLoader,loader2,setLoader2} = useContext(UtilsContext);
+
 
     const request = {
         method: 'GET',
@@ -28,6 +31,8 @@ const MyTweetList = (params) => {
             if(response.status === 200)
             {
                 setTweets(data);
+                console.log(data);
+                setLoader2(false);
             }
             else
             {
@@ -57,7 +62,7 @@ const MyTweetList = (params) => {
     return(
         <div>
              {tweets.slice(0).reverse().map(tweet => {
-            return <Tweet id={tweet.id} key={tweet.id} content={tweet.content} likes={tweet.likes} upd={tweet.updation_date} user={tweet.user.username} />;
+            return <Tweet id={tweet.id} key={tweet.id} content={tweet.content} likes={tweet.likes} upd={tweet.updation_date} user={tweet.user.username} image={tweet.profile_image} post_image={tweet.image} />;
           })}
         </div>
     );
