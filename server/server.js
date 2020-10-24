@@ -1,10 +1,8 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const favicon = require('express-favicon');
- app.use(favicon(__dirname + '/public/favicon.ico'));
 const publicPath = path.join(__dirname, '..', '/build');
-const port = process.env.PORT || 3003;
+const port = process.env.PORT || 3005;
 app.use(express.static(publicPath));
 app.get('*', (req, res) => {
    res.sendFile(path.join(publicPath, 'index.html'));
