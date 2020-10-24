@@ -4,8 +4,8 @@ import SnackbarProvider from 'react-simple-snackbar';
 import './App.css';
 import logo from './assets/twitter.svg'; 
 
-import Signup from './components/signup';
-import Login from './components/login';
+import Signup from './containers/signup';
+import Login from './containers/login';
 
 function Newtwitter() {
 

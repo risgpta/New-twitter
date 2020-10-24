@@ -6,7 +6,11 @@ const UtilsContextProvider = props => {
   
     const [chat,setChat] = useState(false);
     const [mytweet,setMytweet] = useState(false);
-    
+    const [editTweet,setEditTweet] = useState(null);
+    const [editTweetContent,setEditTweetContent] = useState(null);
+    const [editTweetLikes,setEditTweetLikes] = useState(null);
+    const [loader,setLoader] = useState(false);
+    const [loader2,setLoader2] = useState(false);
 
   return (
     <UtilsContext.Provider
@@ -14,7 +18,17 @@ const UtilsContextProvider = props => {
           chat,
           setChat,
           mytweet,
-          setMytweet
+          setMytweet,
+          editTweet,
+          setEditTweet,
+          editTweetContent,
+          setEditTweetContent,
+          editTweetLikes,
+          setEditTweetLikes,
+          loader,
+          setLoader,
+          loader2,
+          setLoader2
       }}
     >
         {props.children}                                                                                                                                                                                                        
