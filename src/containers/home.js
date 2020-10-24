@@ -1,14 +1,16 @@
 import React from 'react';
 import SnackbarProvider from 'react-simple-snackbar';
 
-import Header from './components/header';
-import MainArea from './components/mainArea';
-import Sidebar from './components/sidebar';
-import RightSidebar from './components/rightSidebar';
-import UtilsContextProvider from './contexts/utils';
-import SnackbarContextProvider from './contexts/snackbar';
+import Header from './header';
+import MainArea from '../components/mainArea';
+import AllTweetList from './alltweetsList';
+import Sidebar from './sidebar';
+import RightSidebar from '../components/rightSidebar';
+import UtilsContextProvider from '../contexts/utils';
+import SnackbarContextProvider from '../contexts/snackbar';
 
-import './App.css'; 
+import '../App.css'; 
+import MainLayout from './mainLayout';
 
 function Home(){
     return (
@@ -20,7 +22,7 @@ function Home(){
             <SnackbarProvider>
             <div className="dashboard">
             <Sidebar/>
-            <MainArea/>
+            <MainLayout/>
             <RightSidebar/>
             </div>
             </SnackbarProvider>

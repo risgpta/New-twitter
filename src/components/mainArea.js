@@ -7,7 +7,7 @@ import {UtilsContext} from '../contexts/utils';
 
 import '../App.css';
 
-import MyTweetList from './mytweetList';
+import MyTweetList from '../containers/mytweetList';
 import TweetList from './tweetList';
 import Loader from './loader';
 
@@ -173,8 +173,8 @@ const MainArea = () => {
       },[tweet,mytweet,editTweet,editData])
 
 
-    if(!cookies.Token)
-    return <Redirect to='/'/>
+    //if(!cookies.Token)
+    //return <Redirect to='/'/>
     return(
         <div id="main" className="mainArea">
           <Loader/>
@@ -186,6 +186,7 @@ const MainArea = () => {
             <input className="smallbtn2" onClick={e => postTweet(e)} type="submit" value={editTweetContent ? 'Edit Tweet' : 'Tweet'}/>
             </form>
             {mytweet ? <MyTweetList/> : <TweetList/>}
+            
         </div>
     );
 }

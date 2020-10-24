@@ -6,7 +6,7 @@ const RightSidebar = () => {
 
     return(
         <div className="rightSidebar">
-            <input className="searchTweet" placeholder="Search New Twitter"/>
+            <input className="searchTweet" placeholder="Search"/>
             {chat ? <textarea className="message" rows="5"></textarea> : ''}
         </div>
     );
