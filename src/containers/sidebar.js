@@ -31,7 +31,7 @@ const Sidebar = (props) => {
     }
 
     function showChat(){
-        setChat(!chat);
+        //setChat(!chat);
     }
     return(
         <div className="sidebar">
