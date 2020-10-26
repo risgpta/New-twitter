@@ -49,6 +49,9 @@ const TweetBox = (props) => {
             {props.Loading === true ? 
             <Loader/>
             :
+            cookies.Username === null || cookies.Username === undefined  ? 
+            <h3>Login to start tweeting!</h3>
+            :
             <div style={{display:'flex'}}>
              <div style={{cursor:'pointer'}} onClick={() => gotoprofile()}>
             <ProfilePic />
