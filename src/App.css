@@ -8,7 +8,7 @@
   margin: -75px 0 0 -75px;
   border: 2px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 2px solid #193e34;
+  border-top: 2px solid rgba(29,161,242,1.00);
   width: 40px;
   height: 40px;
   animation: spin 2s linear infinite;
@@ -77,7 +77,7 @@
 
 .AppInfo{
   flex-basis : 50%;
-  background: linear-gradient(#193e34, #130606);
+  background: linear-gradient(rgba(29,161,242,1.00), #130606);
   height: 100vh;
   color:white;
   margin:auto;
@@ -100,7 +100,7 @@
   border: 1px solid;
   border-radius: 25px;
   width: 15vmin;
-  background-color: #193e34;
+  background-color: rgba(29,161,242,1.00);
   color: white;
   margin: auto;
   font-size: 13px;
@@ -123,11 +123,11 @@
 
 .signup:hover{
   background-color: white;
-  color: #193e346b;
+  color: rgba(29,161,242,1.00)6b;
 }
 
 .login:hover{
-  background-color: #193e346b;
+  background-color: rgba(29,161,242,1.00)6b;
   color:white;
 }
 
@@ -138,7 +138,7 @@
   height: fit-content;
   margin: auto;
   background-color: white;
-  border: 1px solid #193e346b;
+  border: 1px solid rgba(29,161,242,1.00)6b;
   border-radius: 20px;
   margin-top: 5vmax;
   outline:none;
@@ -151,7 +151,7 @@
 .formStyle > label{
   display: block;
   margin-top: 10px;
-  color:#193e34;
+  color:rgba(29,161,242,1.00);
   font-style: italic;
 }
 
@@ -175,7 +175,7 @@
   margin: auto;
   margin-top: 30px;
   cursor: pointer;
-  background-color: #193e34;
+  background-color: rgb(30 162 241 / 14%);
   color:white;
   outline: none;
 }
@@ -183,7 +183,7 @@
 .header{
   height:7vmin;
   display: flex;
-  border: 1px solid  #a7b4b0;
+  border: 1px solid rgb(8 62 99);
   padding:20px;
 }
 .headerContent{
@@ -191,7 +191,7 @@
   padding:10px;
   font-size: 30px;
   font-weight:500;
-  color:#a7b4b0;
+  color:rgb(8 62 99);
 }
 .header > img{
   flex-basis: 15%;
@@ -202,20 +202,22 @@
 }
 
 .sidebar{
-  flex-basis: 20%;
-  background-color: #a7b4b0;
+  flex-basis: 25%;
+  background-color: rgb(30 162 241 / 14%);
   height: 100vh;
   overflow-y: auto;
   scrollbar-width: none;
   padding:10px;
 }
 .mainArea{
-  flex-basis: 60%;
+  flex-basis: 50%;
   height: 100vh;
   overflow-y: auto;
   overflow-x:hidden;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  border-left: 1px solid rgb(8 62 99 / 29%);
+  border-right: 1px solid rgb(8 62 99 / 29%);
 }
 .mainArea::-webkit-scrollbar {
   display: none;
@@ -228,8 +230,8 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .rightSidebar{
-  flex-basis: 20%;
-  background-color: #a7b4b0;
+  flex-basis: 30%;
+  background-color: rgb(30 162 241 / 14%);
   height: 100vh;
   overflow-y: auto;
   scrollbar-width: none;
@@ -237,21 +239,23 @@ scrollbar-width: none;  /* Firefox */
 }
 .sidebarOptions
 {
-  padding: 15px;
+  padding: 10px;
   border: 1px solid;
   border-radius: 25px;
-  width: max-content;
+  width: 75px;
   margin: auto;
-  margin-top:16px;
-  background-color: #193e34;
-  color:white;
+  margin-top: 16px;
+  background-color: rgba(29,161,242,1.00);
+  color: white;
   font-size: 16px;
   cursor: pointer;
   outline: none;
+  margin-left: 50%;
+  text-align: center;
 }
 
 .sidebarOptions:hover{
-  color:#193e34;
+  color:rgba(29,161,242,1.00);
   background-color: white;
 }
 
@@ -259,7 +263,7 @@ scrollbar-width: none;  /* Firefox */
   font-size: 16px;
   display: inline-block;
   width: -webkit-fill-available;
-  border: 2px solid  #a7b4b0;
+  border: 2px solid  rgb(30 162 241 / 14%);
   padding:20px;
   font-size: 25px;
   border:none;
@@ -286,7 +290,7 @@ scrollbar-width: none;  /* Firefox */
   flex:1;
   font-size: 20px;
   font-weight: bold;
-  color:#193e34;
+  color:rgb(8 62 99);
 }
 
 .user>img{
@@ -320,13 +324,14 @@ scrollbar-width: none;  /* Firefox */
 .searchTweet{
   display: block;
   margin: auto;
-  margin-top:50px;
+  margin-top: 50px;
   font-size: 14px;
-  width: -webkit-fill-available;
-  border:2px solid;
+  width: fit-content;
+  border: 1px solid #073f63;
   padding: 5px;
   border-radius: 20px;
   outline: none;
+  margin-right: 40%;
 }
 
 .smallbtn2{
@@ -338,7 +343,7 @@ scrollbar-width: none;  /* Firefox */
   margin: auto;
   margin-top: 23px;
   cursor: pointer;
-  background-color: #193e34;
+  background-color: rgba(29,161,242,1.00);
   color: white;
   outline: none;
   font-size: 15px;
@@ -346,8 +351,8 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .smallbtn2:hover{
-  color:#193e34;
-  background-color: #a7b4b0;
+  color:rgba(29,161,242,1.00);
+  background-color: rgb(30 162 241 / 14%);
 }
 
 .message{
@@ -369,7 +374,7 @@ scrollbar-width: none;  /* Firefox */
   width: 8vmin;
   margin: auto;
   cursor: pointer;
-  background-color: #193e34;
+  background-color: rgba(29,161,242,1.00);
   color: white;
   outline: none;
   font-size: 14px;
@@ -383,7 +388,7 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .tweetbox{
-  border-bottom: 23px solid #021b1412;
+  border-bottom: 23px solid rgb(30 162 241 / 4%);
   padding: 20px;
   display: flex;
 }
@@ -431,7 +436,7 @@ scrollbar-width: none;  /* Firefox */
   width: fit-content;
   font-size: 22px;
   font-weight: 600;
-  color: #a6b4b0;
+  color: #1ea2f1;
 }
 
 .profileUsername{
@@ -440,7 +445,7 @@ scrollbar-width: none;  /* Firefox */
   font-size: 16px;
   font-weight: 600;
   font-style: oblique;
-  color: #1a3e33;
+  color: #073f63;
 }
 
 .profileEmail{
@@ -448,7 +453,7 @@ scrollbar-width: none;  /* Firefox */
   width: fit-content;
   font-size: 16px;
   font-weight: 500;
-  color: #a6b4b0;
+  color: #1ea2f1;
 }
 
 .bio{
@@ -456,7 +461,7 @@ scrollbar-width: none;  /* Firefox */
   width: fit-content;
   font-size: 18px;
   font-weight: 600;
-  color: #a6b4b0;
+  color: #1ea2f1;
   padding:15px;
 }
 
@@ -477,7 +482,7 @@ scrollbar-width: none;  /* Firefox */
   margin:auto;
   font-size: 16px;
   font-weight: 500;
-  color: #a6b4b0;
+  color: #1ea2f1;
   display: flex;
 }
 
@@ -485,13 +490,13 @@ scrollbar-width: none;  /* Firefox */
   margin:auto;
   font-size: 20px;
   font-weight: 500;
-  color: #1a3e33;
+  color: #1ea2f1;
   width: fit-content;
   flex-basis:20%;
 }
 
 .follow div span{
-  color: #a6b4b0;
+  color: #073f63;
   padding-right:5px;
   vertical-align: baseline;
 }
@@ -505,7 +510,7 @@ scrollbar-width: none;  /* Firefox */
   margin: auto;
   margin-top: 120px;
   cursor: pointer;
-  background-color: #193e34;
+  background-color: rgba(29,161,242,1.00);
   color: white;
   outline: none;
   font-size: 15px;
@@ -513,15 +518,17 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .editbtn:hover{
-  color:#193e34;
-  background-color: #a7b4b0;
+  color:rgba(29,161,242,1.00);
+  background-color: rgb(30 162 241 / 14%);
 }
 
 .tweetPostImage{
   height: 400px;
-    width: 100%;
-    display: block;
-    margin: auto;
+  width: 400px;
+  display: block;
+  margin: auto;
+  border: 1px solid #064063;
+  border-radius: 15px;
 }
 
 .mainTweet{
