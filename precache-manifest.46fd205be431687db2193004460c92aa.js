@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "58955fb5f214c8f33019ccf9a35911fa",
+    "revision": "84808ae82cfabd26d716067ea28c229c",
     "url": "/twitter/index.html"
   },
   {
-    "revision": "4c6ad67573ab11cc8be4",
-    "url": "/twitter/static/css/main.6acb394b.chunk.css"
+    "revision": "2443e0ce6cb5dbf2dc2f",
+    "url": "/twitter/static/css/main.6e0b258b.chunk.css"
   },
   {
     "revision": "8cdfac7bf02b1704a613",
@@ -16,16 +16,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/twitter/static/js/2.a42947f4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4c6ad67573ab11cc8be4",
-    "url": "/twitter/static/js/main.7f749e5c.chunk.js"
+    "revision": "2443e0ce6cb5dbf2dc2f",
+    "url": "/twitter/static/js/main.535d1ae6.chunk.js"
   },
   {
     "revision": "1af2ebb3fe3230859338",
     "url": "/twitter/static/js/runtime-main.66254f84.js"
   },
   {
-    "revision": "085a38ebb626afe15a473b7b986bf7a6",
-    "url": "/twitter/static/media/add.085a38eb.svg"
+    "revision": "0750e46c0f3c198fb2b2f27b8ce5bccf",
+    "url": "/twitter/static/media/add.0750e46c.svg"
   },
   {
     "revision": "f2103d04e38fd4f5b096c7b008e62896",
@@ -36,12 +36,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/twitter/static/media/heart.822330c7.svg"
   },
   {
-    "revision": "30351fcf3e69dde33bd4b60600f51292",
-    "url": "/twitter/static/media/person.30351fcf.svg"
+    "revision": "6c017a1c7d925b5f99a89a504ea353c7",
+    "url": "/twitter/static/media/person.6c017a1c.svg"
   },
   {
-    "revision": "91ee1ebee1d08569f5b84fbf4cd8a9db",
-    "url": "/twitter/static/media/twitter.91ee1ebe.svg"
+    "revision": "33f06ef7a030f6da1bf980dcc297b102",
+    "url": "/twitter/static/media/twitter.33f06ef7.svg"
   },
   {
     "revision": "ea28a43cd38df5a645a6b0074c5ea685",
