@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useContext} from 'react';
-import { useCookies } from 'react-cookie';
+
 import { useSnackbar } from 'react-simple-snackbar';
-import { Redirect } from 'react-router';
+
 
 import {UtilsContext} from '../contexts/utils';
 
@@ -48,13 +48,13 @@ const MainArea = () => {
       
     const [openSnackbar, closeSnackbar] = useSnackbar(options);
     const [openErrSnackbar, closeErrSnackbar] = useSnackbar(optionsError);
-    const [cookies, setCookie] = useCookies();
+    
     const [tweet,setTweet] = useState(null);
     const [editData,setEditData] = useState(null);
 
     const editRequest = {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json','Authorization':'Token '+cookies.Token},
+      headers: { 'Content-Type': 'application/json','Authorization':'Token '+localStorage.getItem('token')},
       body: JSON.stringify(editData)
     };
 
@@ -79,7 +79,7 @@ const MainArea = () => {
 
     const request = {
         method: 'POST',
-        headers: {'Authorization':'Token '+cookies.Token},
+        headers: {'Authorization':'Token '+localStorage.getItem('token')},
         body: tweet
       };
     
@@ -173,7 +173,7 @@ const MainArea = () => {
       },[tweet,mytweet,editTweet,editData])
 
 
-    //if(!cookies.Token)
+    //if(!localStorage.getItem('token'))
     //return <Redirect to='/'/>
     return(
         <div id="main" className="mainArea">

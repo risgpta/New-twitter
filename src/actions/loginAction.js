@@ -1,7 +1,6 @@
 import {LOGIN_LOAD,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT} from './types';
+import {BASE} from './baseurl';
 export const  login = (payload) => dispatch => {
-
-    console.log(payload);
     const request = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -13,53 +12,30 @@ export const  login = (payload) => dispatch => {
         isLoading:true,
     });
 
-    fetch('https://twitter-clone-mukul.herokuapp.com/users/login/',request)
-    .then(response => {
-      console.log(response);
-      const responseJson = response.json().then(data => {
+    fetch(`${BASE}/auth/login`,request)
+    .then(response => response.json())
+    .then(data => {
       console.log(data); 
-      if(response.status === 200)
-      {
+        localStorage.setItem('token',data.token);
+        localStorage.setItem('userid',data.user_info._id);
+        localStorage.setItem('name',data.user_info.name);
+        localStorage.setItem('username',data.user_info.username);
+        localStorage.setItem('email',data.user_info.email);
         dispatch({
             type:LOGIN_SUCCESS,
             isLoading:false,
             payload : data,
             done : 1,
-        })        
-      }
-      else
-      {
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log(res);
-          dispatch({
-            type:LOGIN_FAIL,
-            isLoading:false,
-            payload : res,
-            done : 0,
-          })
-      }
+        })       
     })   
-    })
-    .catch(error => {
-      const responseJson = error.json().then(data => {
-          console.log(data);
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log('error'+res)
+    .catch(err => {
+          console.log(err);
           dispatch({
             type:LOGIN_FAIL,
             isLoading:false,
-            payload : res,
-            done : 0,
+            payload : err,
+            done : -1,
           })
-        })
     });
 }
 

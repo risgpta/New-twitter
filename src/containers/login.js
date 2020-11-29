@@ -1,11 +1,9 @@
 import React,{useState,useEffect} from 'react';
 import Modal from 'react-modal';
-import { Redirect } from 'react-router';
-import { useSnackbar } from 'react-simple-snackbar';
 import {Link} from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+
 import { connect } from 'react-redux';
-import {login} from '../actions/loginAction';
+import {login,gotInfo} from '../actions/loginAction';
 
 import '../App.css';
 import logo from '../assets/twitter.svg'; 
@@ -13,34 +11,8 @@ import Loader from '../components/loader';
 
 
 function Login(props) {
-  const [cookies, setCookie] = useCookies();
-
   const [loginIsOpen,setLoginOpen] = useState(false);
   const [logindata,setLogindata] = useState(null);
-
-  useEffect(() => {
-    if(logindata != null)
-    {
-      console.log(logindata);
-      props.login(logindata);
-    }
-  },[logindata])
-
-  useEffect(() => {
-    if(props.data)
-    {
-      if(props.success === 1)
-      {
-        setCookie('Token', props.data.token, { path: '/' });
-        setCookie('Username', logindata.username, { path: '/' });
-      }
-      else
-      {
-        alert('something went wrong...');
-      }
-      setLogindata(null);
-    }
-  },[props.data])
 
   function openLogin() {
     setLoginOpen(true);
@@ -49,6 +21,28 @@ function Login(props) {
   function closeLogin(){
     setLoginOpen(false);
   }
+
+  useEffect(() => {
+    if(logindata != null)
+    {
+      props.login(logindata);
+      closeLogin();
+    }
+  },[logindata])
+
+  useEffect(() => {
+    if(props.data)
+    {
+      if(props.success === -1)
+      {
+        alert('something went wrong...');
+      }
+      else
+      {
+        console.log('storing info...')
+      }
+    }
+  },[props.Loading]);
 
   function handleLoginSubmit(e){
     e.preventDefault();
@@ -68,7 +62,6 @@ function Login(props) {
       <button onClick={openLogin} className="login">
         Login
       </button>
-      {props.Loading ? () => closeLogin() : '' }
         <Modal
           isOpen={loginIsOpen}
           onRequestClose={closeLogin}
@@ -76,7 +69,7 @@ function Login(props) {
           ariaHideApp={false}
         >
           {props.Loading ? <Loader/> :
-          <div>
+          <div className="basediv">
            <img src={logo} alt="logo" style={{height:'30px', width:'30px', display:'block', margin:'auto',marginTop:'20px'}}/>
           <form id="login" className="formStyle" method="POST">
             <label>Username</label>

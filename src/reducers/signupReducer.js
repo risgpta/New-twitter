@@ -3,7 +3,7 @@ import {SIGNUP_LOAD,SIGNUP_SUCCESS,SIGNUP_FAIL} from '../actions/types';
 const initialState = {
     isLoading : false,
     data : null,  
-    done : -1,
+    done : 0,
 }
 
 export default function(state = initialState,action){

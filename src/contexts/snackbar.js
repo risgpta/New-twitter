@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext } from 'react';
 import { useSnackbar } from 'react-simple-snackbar';
 
 export const SnackbarContext = createContext();

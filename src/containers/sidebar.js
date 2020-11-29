@@ -1,6 +1,4 @@
-import React,{useContext,useEffect} from 'react';
-import { useCookies } from 'react-cookie';
-import {UtilsContext} from '../contexts/utils';
+import React,{useEffect} from 'react';
 import {logout} from '../actions/loginAction';
 import { connect } from 'react-redux';
 import '../App.css';
@@ -8,19 +6,11 @@ import { changeTweetPage, goToProfile } from '../actions/miscAction';
 
 const Sidebar = (props) => {
 
-    const {chat,setChat} = useContext(UtilsContext);
-
-    const [cookies, setCookie,removeCookie] = useCookies();
 
     function logout(){
-        removeCookie('Token',{ path: '/' },-1);
-        removeCookie('Username',{ path: '/' },-1);
+        localStorage.clear();
         props.logout();
     }
-    useEffect(()=>{
-
-        
-    },[props.flag,props.profile])
 
     function goTomytweets(){
         props.changeTweetPage(props.flag);
@@ -30,17 +20,15 @@ const Sidebar = (props) => {
         props.goToProfile(props.profile);
     }
 
-    function showChat(){
-        //setChat(!chat);
-    }
     return(
         <div className="sidebar">
+            <div className="sidebarDiv">
             <div className="sidebarOptions">#Explore</div>
             {
-                cookies.Username === null || cookies.Username === undefined ?  '' 
+                localStorage.getItem('username') === null || localStorage.getItem('username') === undefined ?  '' 
                 :
                 <div className="mobileSec">
-                <div onClick={showChat} className="sidebarOptions">Messages</div>
+                <div className="sidebarOptions">Messages</div>
                 {
                     props.profile === false ?
                     <div onClick={goTomytweets}  className="sidebarOptions">{props.flag ? 'My tweets' : 'All tweets'}</div>
@@ -50,6 +38,7 @@ const Sidebar = (props) => {
                 <div onClick={logout} className="sidebarOptions">log out</div>
                 </div>
             }
+            </div>
         </div>
     );
 }
@@ -57,6 +46,7 @@ const Sidebar = (props) => {
 const mapStateToProps = (state) => ({
     flag : state.miscActionReducer.flag,
     profile : state.miscActionReducer.profile,
+    success : state.loginReducer.done, 
   })
   
 const mapDispatchToProps = (dispatch) => {

@@ -22,21 +22,17 @@ function Signup(props) {
   useEffect(() => {
     if(signupdata != null)
     {
-      console.log(signupdata);
       props.signup(signupdata);
+      if(props.success === 1)
+      {
+        console.log('success');
+      }
+      else
+      {
+        console.log('Profile creation unsuccessful');  
+      }
     }
   },[signupdata])
-
-  useEffect(() => {
-    if(props.success === 1)
-    {
-      console.log('success');
-    }
-    else
-    {
-      console.log('Profile creation unsuccessful');  
-    }
-  },[props.data]);
 
   function handleSignupSubmit(e){
     e.preventDefault();
@@ -64,13 +60,11 @@ function Signup(props) {
           ariaHideApp={false}
         >
           {props.Loading ? <Loader/> : 
-          <div>
+          <div className="basediv">
            <img src={logo} alt="logo" style={{height:'30px', width:'30px', display:'block', margin:'auto',marginTop:'20px'}}/>
           <form id="signup" className="formStyle" >
-            <label>First Name</label>
-            <input name="first_name" type="text" />
-            <label>Last Name</label>
-            <input name="last_name" type="text" />
+            <label>Name</label>
+            <input name="name" type="text" />
             <label>Username</label>
             <input name="username" type="text" />
             <label>Email</label>
@@ -91,7 +85,7 @@ function Signup(props) {
 const mapStateToProps = (state) => ({
   data : state.signupReducer.data,
   Loading : state.signupReducer.isLoading,
-  success : state.signupReducer.success,
+  success : state.signupReducer.done,
 })
 
 const mapDispatchToProps = (dispatch) => {

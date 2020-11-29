@@ -6,38 +6,29 @@ import '../App.css';
 
 import Tweet from '../components/tweet';
 import Loader from '../components/loader';
-import { useCookies } from 'react-cookie';
+
 
 const MyTweetList = (props) => {
    
     const [tweets,setTweets] = useState(null);
-    const [cookies, setCookie] = useCookies();
+    
 
     useEffect(() => {
         if(props.myTweets){
-            setTweets(props.myTweets)
+            setTweets(props.myTweets.message)
+            console.log(props.myTweets.message)
         }
         else{
-            const data = {
-              token : cookies.Token,
-            }
-            props.fetchMyTweets(data);
+            props.fetchMyTweets();
         }
-        console.log(props.myTweets);
-    },[props.myTweets,props.Loading,tweets]);
+    },[props.myTweets]);
 
-    useEffect(() => {
-      const data = {
-        token : cookies.Token,
-      }
-      props.fetchMyTweets(data);
-    },[props.update]);
 
     return(
-         <div>
-         {props.Loading === true ? <Loader/> : tweets === null ? '' : tweets.slice(0).reverse().map(tweet => {
-        return <Tweet key={tweet.id} id={tweet.id} content={tweet.content} likes={tweet.likes} upd={tweet.updation_date} user={tweet.user.username} image={tweet.profile_image} post_image={tweet.image}/>;
-      })}
+      <div>
+      {props.Loading === true ? <Loader/> : tweets ? tweets.map(tweet => {
+     return <Tweet key={tweet._id} id={tweet._id} content={tweet.message} likes={tweet.likescount} upd={tweet.updatedAt} user={tweet.author} comm={tweet.commentscount} img={tweet.imagelinks}/>;
+      }) : ''} 
     </div>
     );
     
@@ -47,12 +38,11 @@ const MyTweetList = (props) => {
 const mapStateToProps = (state) => ({
     myTweets : state.myTweetsReducer.data,
     Loading : state.myTweetsReducer.isLoading,
-    update : state.tweetReducer.isLoading,
 })
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      fetchMyTweets: (payload) => dispatch(fetchMyTweets(payload)),
+      fetchMyTweets: () => dispatch(fetchMyTweets()),
     };
 };
 

@@ -1,18 +1,33 @@
 import {ALL_TWEETS_LOAD,ALL_TWEETS_SUCCESS,ALL_TWEETS_FAIL} from './types';
-
-const request = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json'},
-};
+import {BASE} from './baseurl';
 
 export const  fetchAllTweets = () => dispatch => {
-    
+
+  let request = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json',
+  },
+};
+
+    if(localStorage.getItem('token'))
+    {
+        request = {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json',
+          'Authorization' : 'token '+localStorage.getItem('token'),
+        },
+      };
+    }
+
+    console.log('id',localStorage.getItem('token'));
+    console.log(request);
+
     dispatch({
         type:ALL_TWEETS_LOAD,
         isLoading:true,
     });
 
-    fetch('https://twitter-clone-mukul.herokuapp.com/alltweets/',request)
+    fetch(`${BASE}/tweet/alltweets?page=1`,request)
     .then(response => {
       response.json().then(data => {
       if(response.status === 200)
@@ -25,30 +40,20 @@ export const  fetchAllTweets = () => dispatch => {
       }
       else
       {
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
           dispatch({
             type:ALL_TWEETS_FAIL,
             isLoading:false,
-            payload : res,
+            payload : data,
         })
       }
     })   
     })
     .catch(error => {
-          error.json().then(data => {
-          let res = '';
-          for(let key in data)
-          {
-            res=res+key+','+data[key]+'.';
-          }
+          error.json().then(error=> {
           dispatch({
             type:ALL_TWEETS_FAIL,
             isLoading:false,
-            payload : res,
+            payload : error,
           })
         })
     });

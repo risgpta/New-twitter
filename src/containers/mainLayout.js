@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React from 'react';
 import '../App.css';
 import TweetBox from './tweetbox';
 import AllTweetList from './alltweetsList';
@@ -9,18 +9,7 @@ import Loader from '../components/loader';
 
 const MainLayout = (props) => {
 
-  const [update,setUpdate] = useState(false);
-
-    useEffect(()=>{
-      console.log('main');
-      setUpdate(props.Loading)
-    },[props.flag,props.profile,props.Loading]);
-
-    useEffect(() => {
-
-    });
-
-    return(
+  return(
 
         <div className="mainArea">
           {
@@ -48,8 +37,9 @@ const MainLayout = (props) => {
 const mapStateToProps = (state) => ({
     flag : state.miscActionReducer.flag,
     profile : state.miscActionReducer.profile,
-    Loading : state.tweetReducer.isLoading,
-  })
+    Loading : state.tweetReducer.isLoading, 
+    success : state.loginReducer.done, 
+});
   
 const mapDispatchToProps = (dispatch) => {
     return {

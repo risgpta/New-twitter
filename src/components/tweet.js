@@ -1,11 +1,8 @@
-import React,{useEffect,useContext,useState,useRef} from 'react';
+import React,{useEffect,useState,useRef} from 'react';
 
 import like from '../assets/heart.svg'; 
 import profile from '../assets/person.svg'; 
 import unlike from '../assets/unlikeheart.svg'
-import {SnackbarContext} from '../contexts/snackbar';
-import { useCookies } from 'react-cookie';
-import {UtilsContext} from '../contexts/utils';
 
 import { connect } from 'react-redux';
 import {deleteTweet,updateTweet} from '../actions/tweetAction';
@@ -14,7 +11,7 @@ import '../App.css';
 
 const Tweet = (props) => {
     
-    const [cookies, setCookie] = useCookies();
+    
 
     const inputRef = useRef(null);
 
@@ -36,7 +33,7 @@ const Tweet = (props) => {
     function likePost(id)
     {
         let putdata = {
-            token : cookies.Token,
+            token : localStorage.getItem('token'),
             id:id,
             body : JSON.stringify({
                 ...data,
@@ -75,7 +72,7 @@ const Tweet = (props) => {
         if(deleteTweetid !== null)
         {
             let data = {
-                token : cookies.Token,
+                token : localStorage.getItem('token'),
                 id:deleteTweetid,
             }
             props.deleteTweet(data);   
@@ -91,7 +88,7 @@ const Tweet = (props) => {
         if(editTweetid !== null)
         {
             let putdata = {
-                token : cookies.Token,
+                token : localStorage.getItem('token'),
                 id:editTweetid,
                 body : JSON.stringify(data),
             }
@@ -106,6 +103,17 @@ const Tweet = (props) => {
     let date = time.split('T');
     const Update_date = new Date(date[0]);
     let Update_time = new Date(time);
+
+    let image_item = [];
+
+    if(props.img.length)
+    {
+        for(let item of props.img)
+        {
+            image_item.push(<img  src={item} alt="image" className="tweetPostImage"/> );
+        }
+    }
+
     return (
         <div className="tweet">
           <div className="aboveTweet">
@@ -120,13 +128,14 @@ const Tweet = (props) => {
                 <div className="tweetContent">{props.content}</div>
             }
             {
-                props.post_image ? <img  src={props.post_image} alt="image" className="tweetPostImage"/> : ''
+                image_item
             }
             </div>
             <div className="likes"><img  onClick={() => likePost(props.id)}  src={ props.likes > 0 ? like : unlike} alt="like" style={{height:'30px', width:'30px', display:'inline', margin:'auto'}}/>
             {props.likes > 0 ? props.likes+' people liked it' : 'Be the first to like this'}
+            {props.comm > 0 ? props.comm+' people commented on it' : 'Be the first to comment on this'}
             {
-                cookies.Username === props.user ? <span><span onClick={() => deletePost(props.id)} className="deletebtn">delete</span> <span onClick={edit === true ? () => editPost(props.id) : () => {setEdit(true)}} className="deletebtn">{edit === true ? 'save' : 'edit'}</span></span> : ''
+                localStorage.getItem('username') === props.user ? <span><span onClick={() => deletePost(props.id)} className="deletebtn">delete</span> <span onClick={edit === true ? () => editPost(props.id) : () => {setEdit(true)}} className="deletebtn">{edit === true ? 'save' : 'edit'}</span></span> : ''
             }
             </div>
         </div>

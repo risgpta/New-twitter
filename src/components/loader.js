@@ -1,5 +1,4 @@
-import React,{useContext,useState,useEffect} from 'react';
-import {UtilsContext} from '../contexts/utils';
+import React from 'react';
 
 const Loader = () =>{
     return (

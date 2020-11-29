@@ -6,8 +6,8 @@ import '../App.css';
 import email from '../assets/email.svg'
 import { connect } from 'react-redux'
 import Loader from '../components/loader';
-import { useCookies } from 'react-cookie';
-import addPicture from '../assets/add.svg'
+
+import addPicture from '../assets/target.svg'
 
 
 const ProfilePage = (props) => {
@@ -15,23 +15,23 @@ const ProfilePage = (props) => {
     const [profile,setProfile] = useState(null);
     const [edit,setEdit] = useState(false);
     const [data,setData] = useState(null);
-    const [cookies, setCookie] = useCookies();
+    
 
     useEffect(() => {
         if(props.profile){
-            setProfile(props.profile)
+            setProfile(props.profile.profile)
             setData({
                 ...data,
-                bio : props.profile.bio,
+                bio : props.profile.profile? props.profile.profile.bio : '',
             });
+            console.log(props.profile);
         }
         else{
             const data = {
-              username : cookies.Username,
+              username : localStorage.getItem('username'),
             }
             props.fetchProfile(data);
         }
-        console.log(props.profile);
     },[props.profile]);
 
     useEffect(()=>{
@@ -51,11 +51,15 @@ const ProfilePage = (props) => {
         console.log(form_data);
         let putdata = {
             data : form_data,
-            token : cookies.Token,
-            username : cookies.Username,
+            token : localStorage.getItem('token'),
+            username : localStorage.getItem('username'),
         }
         props.updateProfile(putdata);
         setEdit(false);
+        const d = {
+            username : localStorage.getItem('username'),
+          }
+          props.fetchProfile(d);
     }
 
     const change = (key,value) => {
@@ -73,25 +77,25 @@ const ProfilePage = (props) => {
             <div>
             {
                 edit == false ?
-                <img className="profilePicProfile" src={profile.image}/>
+                <img className="profilePicProfile" src={profile ? profile.profilePic : ''}/>
                 :
                 <div>
-                <img className="profilePicProfile" src={profile.image}/>
+                <img className="profilePicProfile" src={profile ? profile.profilePic : ''}/>
                 <input type="file"
                        id="postImage"
                        className = "imageUpload"
-                       onChange ={(e) => change("image",e.target.files[0])}
+                       onChange ={(e) => change("profilePic",e.target.files[0])}
                         />
                 <label className="uploadImageProfile" htmlFor="postImage"><img src={addPicture} style={{height:'30px', width:'30px', display:'inline', margin:'auto'}}/></label>
                 </div>
             }
             <div>
-            <div className="profileName">{profile.user.first_name} {profile.user.last_name}</div>
-            <div className="profileUsername">@{profile.user.username}</div>
-            <div className="profileEmail"> <img src={email} style={{height:'20px', width:'20px', display:'inline', margin:'auto',verticalAlign:'middle'}} />  {profile.user.email}</div>
+            <div className="profileName">{localStorage.getItem('name')}</div>
+            <div className="profileUsername">@{localStorage.getItem('username')}</div>
+            <div className="profileEmail"> <img src={email} style={{height:'20px', width:'20px', display:'inline', margin:'auto',verticalAlign:'middle'}} />  {localStorage.getItem('email')}</div>
             {
                 edit === false ?
-                <div>{profile.bio === null ? <div className="bio"> Tell us about yourself</div> : <div className="bio" >{profile.bio}</div>}</div>
+                <div>{profile === null ? <div className="bio"> Tell us about yourself</div> : <div className="bio" >{profile.bio}</div>}</div>
                 :
                 <div><input className="bioInput" onChange={(e) => change("bio",e.target.value)} value={data === null ? '' : data.bio} type="text" placeholder="Tell us about yourself..."/></div>
             }

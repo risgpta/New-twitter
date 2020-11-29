@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react';
 import ProfilePic from '../components/profilePic'
-import addPicture from '../assets/add.svg'
+import addPicture from '../assets/target.svg'
+import addVideo from '../assets/screen-player.svg'
 import { connect } from 'react-redux'
 import Loader from '../components/loader';
-import { useCookies } from 'react-cookie';
+
 import {goToProfile} from '../actions/miscAction'
 import '../App.css';
 
@@ -12,11 +13,6 @@ import {createTweet} from '../actions/tweetAction';
 const TweetBox = (props) => {
 
     const [data,setData] = useState(null);
-    const [cookies, setCookie] = useCookies();
-
-    useEffect(()=>{
-
-    },[data]);
 
     const postTweet = (e) => {
         e.preventDefault();
@@ -28,7 +24,7 @@ const TweetBox = (props) => {
         console.log(form_data);
         let putdata = {
             data : form_data,
-            token : cookies.Token,
+            token : localStorage.getItem('token'),
         }
         props.createTweet(putdata);
     }
@@ -49,8 +45,8 @@ const TweetBox = (props) => {
             {props.Loading === true ? 
             <Loader/>
             :
-            cookies.Username === null || cookies.Username === undefined  ? 
-            <h3>Login to start tweeting!</h3>
+            localStorage.getItem('username') === null || localStorage.getItem('username') === undefined  ? 
+            <h3 style={{fontFamily: 'Avenir-Medium',margin: 'auto',color: '#073f63'}}>Login to start tweeting!</h3>
             :
             <div style={{display:'flex'}}>
              <div style={{cursor:'pointer'}} onClick={() => gotoprofile()}>
@@ -65,6 +61,12 @@ const TweetBox = (props) => {
                    onChange ={(e) => change("image",e.target.files[0])}
                     />
             <label className="uploadImage" htmlFor="postImage"><img src={addPicture} style={{height:'30px', width:'30px', display:'inline', margin:'auto'}}/></label>
+            <input type="file"
+                   id="postVideo"
+                   className = "imageUpload"
+                   onChange ={(e) => change("video",e.target.files[0])}
+                    />
+            <label className="uploadImage" htmlFor="postVideo"><img src={addVideo} style={{height:'30px', width:'30px', display:'inline', margin:'auto'}}/></label>
             <input className="smallbtn2" onClick={e => postTweet(e)}  type="submit" value={'Tweet'}/>
             </form>
             </div>
@@ -76,6 +78,7 @@ const TweetBox = (props) => {
 
 const mapStateToProps = (state) => ({
     Loading : state.tweetReducer.isLoading,
+    success : state.loginReducer.done, 
 })
 
 const mapDispatchToProps = (dispatch) => {

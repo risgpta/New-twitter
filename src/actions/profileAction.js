@@ -1,4 +1,5 @@
 import {GET_PROFILE_LOAD,GET_PROFILE_SUCCESS,GET_PROFILE_FAIL,UPD_PROFILE_LOAD,UPD_PROFILE_SUCCESS,UPD_PROFILE_FAIL} from './types';
+import {BASE} from './baseurl';
 
 export const  fetchProfile = (payload) => dispatch => {
 
@@ -13,7 +14,7 @@ export const  fetchProfile = (payload) => dispatch => {
         isLoading:true,
     });
 
-    fetch('https://twitter-clone-mukul.herokuapp.com/users/profile/'+payload.username+'/',request)
+    fetch(`${BASE}/profile?username=${payload.username}`,request)
     .then(response => {
       response.json().then(data => {
       if(response.status === 200)
@@ -27,32 +28,20 @@ export const  fetchProfile = (payload) => dispatch => {
       }
       else
       {
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log(res);
           dispatch({
             type:GET_PROFILE_FAIL,
             isLoading:false,
-            payload : res,
+            payload : data,
         })
       }
     })   
     })
     .catch(error => {
           error.json().then(data => {
-          let res = '';
-          for(let key in data)
-          {
-            res=res+key+','+data[key]+'.';
-          }
-          console.log(res);
           dispatch({
             type:GET_PROFILE_FAIL,
             isLoading:false,
-            payload : res,
+            payload : data,
           })
         })
     });
@@ -72,7 +61,7 @@ export const  updateProfile = (payload) => dispatch => {
       isLoading:true,
   });
 
-  fetch('https://twitter-clone-mukul.herokuapp.com/users/profile/'+payload.username+'/',request)
+  fetch(`${BASE}/profile/update?username=${payload.username}`,request)
   .then(response => {
     response.json().then(data => {
     if(response.status === 200)
@@ -81,37 +70,22 @@ export const  updateProfile = (payload) => dispatch => {
         dispatch({
             type:UPD_PROFILE_SUCCESS,
             isLoading:false,
-            payload : data,
         })
     }
     else
     {
-        let res = '';
-        for(let key in data)
-        {
-            res=res+key+','+data[key]+'.';
-        }
-        console.log(res);
         dispatch({
           type:UPD_PROFILE_FAIL,
           isLoading:false,
-          payload : res,
       })
     }
   })   
   })
   .catch(error => {
         error.json().then(data => {
-        let res = '';
-        for(let key in data)
-        {
-          res=res+key+','+data[key]+'.';
-        }
-        console.log(res);
         dispatch({
           type:UPD_PROFILE_FAIL,
           isLoading:false,
-          payload : res,
         })
       })
   });

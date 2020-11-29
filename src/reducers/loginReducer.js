@@ -3,7 +3,7 @@ import {LOGIN_LOAD,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT} from '../actions/types';
 const initialState = {
     isLoading : false,
     data : null,  
-    done : -1,
+    done : 0,
 }
 
 export default function(state = initialState,action){
@@ -32,7 +32,7 @@ export default function(state = initialState,action){
                 ...state,
                 isLoading : false,
                 data : null,
-                done : -1,
+                done : 0,
             }
         default : 
         return state;

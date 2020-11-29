@@ -14,11 +14,9 @@ export const  createTweet = (payload) => dispatch => {
     });
 
     fetch('https://twitter-clone-mukul.herokuapp.com/mytweet/',request)
-    .then(response => {
-      console.log(response);
-      const responseJson = response.json().then(data => {
+    .then(response => response.json()).then(data => {
       console.log(data); 
-      if(response.status === 200)
+      if(data.status === 200)
       {
         dispatch({
             type:CREATE_TWEET_SUCCESS,
@@ -43,24 +41,14 @@ export const  createTweet = (payload) => dispatch => {
           })
       }
     })   
-    })
-    .catch(error => {
-      const responseJson = error.json().then(data => {
-          console.log(data);
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log('error'+res)
+    .catch(err => {
           dispatch({
             type:CREATE_TWEET_FAIL,
             isLoading:false,
-            payload : res,
+            payload : err,
             done : 0,
           })
-        })
-    });
+    })
 }
 
 export const  updateTweet = (payload) => dispatch => {

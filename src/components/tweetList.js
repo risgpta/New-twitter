@@ -1,5 +1,5 @@
 import React,{useEffect,useState,useContext} from 'react';
-import { useCookies } from 'react-cookie';
+
 
 import {UtilsContext} from '../contexts/utils';
 
@@ -9,7 +9,7 @@ import Tweet from './tweet';
 
 const TweetList = (params) => {
 
-    const [cookies, setCookie] = useCookies();
+    
     const [refresh,setRefresh] = useState(true);
 
     const [tweets,setTweets] = useState([]);

@@ -1,10 +1,12 @@
 import {SIGNUP_LOAD,SIGNUP_SUCCESS,SIGNUP_FAIL} from './types';
+import {BASE} from './baseurl';
 export const  signup = (payload) => dispatch => {
-
-    console.log(payload);
     const request = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         },
         body: JSON.stringify(payload)
       };
     
@@ -13,12 +15,11 @@ export const  signup = (payload) => dispatch => {
         isLoading:true,
     });
 
-    fetch('https://twitter-clone-mukul.herokuapp.com/users/register/',request)
-    .then(response => {
-      console.log(response);
-      const responseJson = response.json().then(data => {
+    fetch(`${BASE}/auth/register/`,request)
+    .then(response => response.json())
+    .then(data => {
       console.log(data); 
-      if(response.status === 200)
+      if(data.status === 200)
       {
         dispatch({
             type:SIGNUP_SUCCESS,
@@ -29,36 +30,21 @@ export const  signup = (payload) => dispatch => {
       }
       else
       {
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log(res);
           dispatch({
             type:SIGNUP_FAIL,
             isLoading:false,
-            payload : res,
-            done : 0,
+            payload : data,
+            done : -1,
           })
       }
     })   
-    })
-    .catch(error => {
-      const responseJson = error.json().then(data => {
-          console.log(data);
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log('error'+res)
+    .catch(err => {
+          console.log(err);
           dispatch({
             type:SIGNUP_FAIL,
             isLoading:false,
-            payload : res,
+            payload : err,
             done : 0,
           })
-        })
     });
 }

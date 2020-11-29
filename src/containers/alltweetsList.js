@@ -13,24 +13,30 @@ const AllTweetList = (props) => {
 
     useEffect(() => {
         if(props.allTweets){
-            setTweets(props.allTweets)
+            setTweets(props.allTweets.message.tweets)
             console.log(props.allTweets);
         }
         else{
             props.fetchAllTweets();
         }
-    },[props.allTweets,props.Loading,tweets]);
+    },[props.allTweets]);
 
     useEffect(() => {
+        console.log(props.success)
+            if(props.success === 1)
+            props.fetchAllTweets();
+    },[props.success]);
+
+   /* useEffect(() => {
         props.fetchAllTweets();
-    },[props.update]);
+    },[props.update]);*/
 
 
     return(
          <div>
-         {props.Loading === true ? <Loader/> : tweets === null ? '' : tweets.slice(0).reverse().map(tweet => {
-        return <Tweet key={tweet.id} id={tweet.id} content={tweet.content} likes={tweet.likes} upd={tweet.updation_date} user={tweet.user.username} image={tweet.profile_image} post_image={tweet.image}/>;
-      })}
+         {props.Loading === true ? <Loader/> : tweets ? tweets.map(tweet => {
+        return <Tweet key={tweet._id} id={tweet._id} content={tweet.message} likes={tweet.likescount} upd={tweet.updatedAt} user={tweet.author} comm={tweet.commentscount} img={tweet.imagelinks}/>;
+      }) : ''} 
     </div>
     );
     
@@ -40,7 +46,7 @@ const AllTweetList = (props) => {
 const mapStateToProps = (state) => ({
     allTweets : state.allTweetsReducer.data,
     Loading : state.allTweetsReducer.isLoading,
-    update : state.tweetReducer.isLoading,
+    success : state.loginReducer.done, 
 })
 
 const mapDispatchToProps = (dispatch) => {

@@ -1,3 +1,44 @@
+@font-face {
+  font-family: 'Spoof-Thin';
+  src: url('./assets/fonts/fontSpoof/Spoof-Thin.otf') format('otf');
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Avenir-Roman';
+  src: url('./assets/fonts/fontAvenir/Avenir-Roman.ttf') format('ttf');
+  font-display: optional;
+}
+@font-face {
+  font-family: 'Avenir-Black';
+  src: url('./assets/fonts/fontAvenir/Avenir-Black.ttf') format('ttf');
+  font-display: optional;
+}
+@font-face {
+  font-family: 'Avenir-Heavy';
+  src: url('./assets/fonts/fontAvenir/Avenir-Heavy.ttf') format('ttf');
+  font-display: optional;
+}
+@font-face {
+  font-family: 'Avenir-Light';
+  src: url('./assets/fonts/fontAvenir/Avenir-Light.otf') format('otf');
+  font-display: optional;
+}
+@font-face {
+  font-family: 'Avenir-Medium';
+  src: url('./assets/fonts/fontAvenir/Avenir-Medium.ttf') format('ttf');
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/fonts/fontNunito/Nunito-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+*{
+  font-family: 'Avenir-Medium';
+}
 #loader {
   position: relative;
   left: 50%;
@@ -8,7 +49,7 @@
   margin: -75px 0 0 -75px;
   border: 2px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 2px solid rgba(29,161,242,1.00);
+  border-top: 2px solid #0a66c2;
   width: 40px;
   height: 40px;
   animation: spin 2s linear infinite;
@@ -68,6 +109,10 @@
 }
 
 
+.basediv{
+  border: 1px solid #e3f3fd;
+  border-radius: 22px;
+}
 
 
 
@@ -77,7 +122,7 @@
 
 .AppInfo{
   flex-basis : 50%;
-  background: linear-gradient(rgba(29,161,242,1.00), #130606);
+  background: linear-gradient(#0a66c2, #130606);
   height: 100vh;
   color:white;
   margin:auto;
@@ -97,10 +142,10 @@
 .signup{
   display: block;
   padding: 8px;
-  border: 1px solid;
+  border: 1px solid black;
   border-radius: 25px;
   width: 15vmin;
-  background-color: rgba(29,161,242,1.00);
+  background-color: #0a66c2;
   color: white;
   margin: auto;
   font-size: 13px;
@@ -123,11 +168,11 @@
 
 .signup:hover{
   background-color: white;
-  color: rgba(29,161,242,1.00)6b;
+  color: #0a66c2;
 }
 
 .login:hover{
-  background-color: rgba(29,161,242,1.00)6b;
+  background-color: #0a66c26b;
   color:white;
 }
 
@@ -138,7 +183,7 @@
   height: fit-content;
   margin: auto;
   background-color: white;
-  border: 1px solid rgba(29,161,242,1.00)6b;
+  border: 1px solid #0a66c26b;
   border-radius: 20px;
   margin-top: 5vmax;
   outline:none;
@@ -151,7 +196,7 @@
 .formStyle > label{
   display: block;
   margin-top: 10px;
-  color:rgba(29,161,242,1.00);
+  color:#0a66c2;
   font-style: italic;
 }
 
@@ -175,49 +220,50 @@
   margin: auto;
   margin-top: 30px;
   cursor: pointer;
-  background-color: rgb(30 162 241 / 14%);
+  background-color: rgb(30 162 241);
   color:white;
   outline: none;
 }
 
 .header{
-  height:7vmin;
+  height: 20px;
   display: flex;
   border: 1px solid rgb(8 62 99);
-  padding:20px;
+  padding: 11px 216px;
+  padding-bottom: 40px;
 }
 .headerContent{
-  flex-basis: 85%;
-  padding:10px;
-  font-size: 30px;
-  font-weight:500;
-  color:rgb(8 62 99);
+  padding: 10px 108px;
+    font-size: 30px;
+    font-weight: 500;
+    color: rgb(8 62 99);
+    font-family: Avenir-Medium;
+    width: 440px;
+    text-align: center;
 }
 .header > img{
   flex-basis: 15%;
 }
 .dashboard{
   display: flex;
-  
+  background: #c7d9f0;
 }
 
 .sidebar{
-  flex-basis: 25%;
-  background-color: rgb(30 162 241 / 14%);
+  flex-basis: 30%;
+  background-color: #c7d9f0;
   height: 100vh;
   overflow-y: auto;
   scrollbar-width: none;
   padding:10px;
 }
 .mainArea{
-  flex-basis: 50%;
+  flex-basis: 40%;
   height: 100vh;
   overflow-y: auto;
   overflow-x:hidden;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-  border-left: 1px solid rgb(8 62 99 / 29%);
-  border-right: 1px solid rgb(8 62 99 / 29%);
 }
 .mainArea::-webkit-scrollbar {
   display: none;
@@ -231,7 +277,7 @@ scrollbar-width: none;  /* Firefox */
 
 .rightSidebar{
   flex-basis: 30%;
-  background-color: rgb(30 162 241 / 14%);
+  background-color: #c7d9f0;
   height: 100vh;
   overflow-y: auto;
   scrollbar-width: none;
@@ -242,20 +288,18 @@ scrollbar-width: none;  /* Firefox */
   padding: 10px;
   border: 1px solid;
   border-radius: 25px;
-  width: 75px;
-  margin: auto;
-  margin-top: 16px;
-  background-color: rgba(29,161,242,1.00);
+  width: 100px;
+  background-color: #0a66c2;
   color: white;
   font-size: 16px;
   cursor: pointer;
   outline: none;
-  margin-left: 50%;
   text-align: center;
+  margin: 17px auto;
 }
 
 .sidebarOptions:hover{
-  color:rgba(29,161,242,1.00);
+  color:#0a66c2;
   background-color: white;
 }
 
@@ -263,7 +307,7 @@ scrollbar-width: none;  /* Firefox */
   font-size: 16px;
   display: inline-block;
   width: -webkit-fill-available;
-  border: 2px solid  rgb(30 162 241 / 14%);
+  border: 2px solid  #c7d9f0;
   padding:20px;
   font-size: 25px;
   border:none;
@@ -272,12 +316,12 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .tweet{
-  display: block;
   width: auto;
-  margin: auto;
-  height: fit-content;
-  margin-top:30px;
-  margin-bottom: 40px;
+  margin: 15px 10px;
+  background: #FFF;
+  border: 1px solid;
+  border-radius: 20px;
+  padding: 7px;
 }
 
 .aboveTweet{
@@ -331,7 +375,8 @@ scrollbar-width: none;  /* Firefox */
   padding: 5px;
   border-radius: 20px;
   outline: none;
-  margin-right: 40%;
+  margin-left: 26px;
+  text-align: center;
 }
 
 .smallbtn2{
@@ -343,7 +388,7 @@ scrollbar-width: none;  /* Firefox */
   margin: auto;
   margin-top: 23px;
   cursor: pointer;
-  background-color: rgba(29,161,242,1.00);
+  background-color: #0a66c2;
   color: white;
   outline: none;
   font-size: 15px;
@@ -351,8 +396,8 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .smallbtn2:hover{
-  color:rgba(29,161,242,1.00);
-  background-color: rgb(30 162 241 / 14%);
+  color:#0a66c2;
+  background-color: #c7d9f0;
 }
 
 .message{
@@ -374,7 +419,7 @@ scrollbar-width: none;  /* Firefox */
   width: 8vmin;
   margin: auto;
   cursor: pointer;
-  background-color: rgba(29,161,242,1.00);
+  background-color: #0a66c2;
   color: white;
   outline: none;
   font-size: 14px;
@@ -391,6 +436,9 @@ scrollbar-width: none;  /* Firefox */
   border-bottom: 23px solid rgb(30 162 241 / 4%);
   padding: 20px;
   display: flex;
+  background: #FFF;
+  border-radius: 20px;
+  margin-top: 12px;
 }
 
 .profilePic{
@@ -422,6 +470,15 @@ scrollbar-width: none;  /* Firefox */
   opacity: 0.5;
 }
 
+.sidebarDiv{
+    width: 150px;
+    margin: 28px auto;
+    background: #FFF;
+    padding: 36px 5px;
+    border-radius: 25px;
+    margin-right: 20px;
+}
+
 .profilePicProfile{
   border-radius: 50%;
     height: 250px;
@@ -429,6 +486,7 @@ scrollbar-width: none;  /* Firefox */
     display: block;
     margin: auto;
     margin-top: 30px;
+    border: 1px solid #073f63;
 }
 
 .profileName{
@@ -508,9 +566,9 @@ scrollbar-width: none;  /* Firefox */
   border-radius: 25px;
   width: 14vmin;
   margin: auto;
-  margin-top: 120px;
+  margin-top: 50px;
   cursor: pointer;
-  background-color: rgba(29,161,242,1.00);
+  background-color: #0a66c2;
   color: white;
   outline: none;
   font-size: 15px;
@@ -518,8 +576,8 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .editbtn:hover{
-  color:rgba(29,161,242,1.00);
-  background-color: rgb(30 162 241 / 14%);
+  color:#0a66c2;
+  background-color: #c7d9f0;
 }
 
 .tweetPostImage{
