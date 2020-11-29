@@ -23,13 +23,15 @@ const MyTweetList = (props) => {
         }
     },[props.myTweets]);
 
+    
+
 
     return(
-      <div>
-      {props.Loading === true ? <Loader/> : tweets ? tweets.map(tweet => {
-     return <Tweet key={tweet._id} id={tweet._id} content={tweet.message} likes={tweet.likescount} upd={tweet.updatedAt} user={tweet.author} comm={tweet.commentscount} img={tweet.imagelinks}/>;
-      }) : ''} 
-    </div>
+        <div>
+        {props.Loading === true ? <Loader/> : tweets ? tweets.map(tweet => {
+       return <Tweet key={tweet._id} id={tweet._id} userid={tweet.author} content={tweet.message} likes={tweet.likescount} upd={tweet.updatedAt} pimg={props.Users[tweet.author].profilePic} user={props.Users[tweet.author].name} comm={tweet.commentscount} vid={tweet.videolinks} img={tweet.imagelinks}/>;
+     }) : ''} 
+   </div>
     );
     
 }
@@ -38,6 +40,7 @@ const MyTweetList = (props) => {
 const mapStateToProps = (state) => ({
     myTweets : state.myTweetsReducer.data,
     Loading : state.myTweetsReducer.isLoading,
+    Users : state.miscActionReducer.userData,
 })
 
 const mapDispatchToProps = (dispatch) => {

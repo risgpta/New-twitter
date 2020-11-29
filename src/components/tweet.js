@@ -21,6 +21,8 @@ const Tweet = (props) => {
     const [editTweetid,setEditTweetid] = useState(null);
     const [edit,setEdit] = useState(false);
 
+    const [showopt,setshowopt] = useState(false);
+
     function deletePost(id){
         setDeleteTweetid(id);
     }
@@ -49,8 +51,7 @@ const Tweet = (props) => {
 
     useEffect(()=>{
         setData({
-            content : props.content,
-            likes : props.likes,
+            message : props.content,
         })
     },[]);
 
@@ -73,7 +74,7 @@ const Tweet = (props) => {
         {
             let data = {
                 token : localStorage.getItem('token'),
-                id:deleteTweetid,
+                tweet_id:deleteTweetid,
             }
             props.deleteTweet(data);   
             setDeleteTweetid(null);
@@ -89,7 +90,7 @@ const Tweet = (props) => {
         {
             let putdata = {
                 token : localStorage.getItem('token'),
-                id:editTweetid,
+                tweet_id:editTweetid,
                 body : JSON.stringify(data),
             }
             props.updateTweet(putdata);   
@@ -97,7 +98,6 @@ const Tweet = (props) => {
             setEdit(false);
         }
     },[editTweetid]);
-
 
     let time = props.upd;   
     let date = time.split('T');
@@ -114,33 +114,79 @@ const Tweet = (props) => {
         }
     }
 
+    let vid_item = [];
+
+    if(props.vid)
+    {
+        vid_item.push(<video className="videoDiv"controls>
+        <source src={props.vid} />
+        </video>)
+    }
+
+    const Options = () => {
+        return (
+            <div>
+                <div className="dropdown">
+                <button onClick={() => setshowopt(!showopt)} className="dropbtn">...</button>
+                <div className="dropdown-content">
+                {
+                    showopt === true ?
+                    <div>
+                    {
+                        localStorage.getItem('userid') === props.userid? 
+                        <span><div onClick={() => deletePost(props.id)} className="deletebtn">delete</div> <div onClick={edit === true ? () => editPost(props.id) : () => {setEdit(true)}} className="deletebtn">{edit === true ? 'save' : 'edit'}</div></span> 
+                        : 
+                        <div className="deletebtn">report</div>
+                    }
+                    </div>
+                    :
+                    ''
+                }
+                </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="tweet">
           <div className="aboveTweet">
-            <div className="user" ><img  src={props.image == null ? profile : props.image} alt="profile" style={{height:'30px', width:'30px', display:'inline', margin:'auto',borderRadius:'50%',verticalAlign: 'middle'}}/>{props.user}</div>
-            <div className="tweetTime">{ Update_time.toLocaleTimeString('en-US', { hour: 'numeric',minute:'numeric', hour12: true })}, {Update_date.toDateString()}</div>
+            <div className="user" ><img  src={props.pimg === null ? profile : props.pimg} alt="profile" style={{height:'30px', width:'30px', display:'inline', margin:'auto',borderRadius:'50%',verticalAlign: 'middle'}}/>{props.user}</div>
+            <div className="tweetTime">{ Update_time.toLocaleTimeString('en-US', { hour: 'numeric',minute:'numeric', hour12: true })} · {Update_date.toLocaleDateString('en-US', {day: 'numeric',month: 'short',year: 'numeric'})}</div>
+            <Options/>
             </div>
             <div className="mainTweet">
             {
                 edit === true ?
-                <input ref={inputRef} onChange={(e) => change("content",e.target.value)} className="mainTweet editTweetcontent" value={data.content}/>
+                <input ref={inputRef} onChange={(e) => change("message",e.target.value)} className="mainTweet editTweetcontent" value={data.message}/>
                 :
                 <div className="tweetContent">{props.content}</div>
             }
             {
                 image_item
             }
+            {
+                image_item.length > 0 ?
+                <span>
+                <a class="prev" >&#10094;</a>
+                <a class="next" >&#10095;</a>
+                </span>
+                :
+                ''
+            }
+            {
+                vid_item
+            }
             </div>
             <div className="likes"><img  onClick={() => likePost(props.id)}  src={ props.likes > 0 ? like : unlike} alt="like" style={{height:'30px', width:'30px', display:'inline', margin:'auto'}}/>
             {props.likes > 0 ? props.likes+' people liked it' : 'Be the first to like this'}
             {props.comm > 0 ? props.comm+' people commented on it' : 'Be the first to comment on this'}
-            {
-                localStorage.getItem('username') === props.user ? <span><span onClick={() => deletePost(props.id)} className="deletebtn">delete</span> <span onClick={edit === true ? () => editPost(props.id) : () => {setEdit(true)}} className="deletebtn">{edit === true ? 'save' : 'edit'}</span></span> : ''
-            }
             </div>
         </div>
     );
 }
+
+
 
 const mapStateToProps = (state) => ({
     Loading : state.tweetReducer.isLoading,

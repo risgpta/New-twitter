@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import {fetchAllTweets} from '../actions/allTweetsListAction';
 import { connect } from 'react-redux'
-
+import {getUserData} from '../actions/miscAction'
 import '../App.css';
 
 import Tweet from '../components/tweet';
@@ -11,10 +11,29 @@ const AllTweetList = (props) => {
    
     const [tweets,setTweets] = useState(null);
 
+    const [users,setUsers] = useState(null);
+
     useEffect(() => {
         if(props.allTweets){
             setTweets(props.allTweets.message.tweets)
             console.log(props.allTweets);
+
+            //taking data from users
+            let userData = props.allTweets.message.users;
+            let user_data = {};
+
+            for(let item of userData)
+            {
+                user_data[item._id] = {
+                    "name" : item.name,
+                    "username" : item.username,
+                    "profilePic" : item.profile.profilePic,
+                }
+            }
+
+            console.log(user_data);
+            setUsers(user_data);
+            props.getUserData(user_data);
         }
         else{
             props.fetchAllTweets();
@@ -35,7 +54,7 @@ const AllTweetList = (props) => {
     return(
          <div>
          {props.Loading === true ? <Loader/> : tweets ? tweets.map(tweet => {
-        return <Tweet key={tweet._id} id={tweet._id} content={tweet.message} likes={tweet.likescount} upd={tweet.updatedAt} user={tweet.author} comm={tweet.commentscount} img={tweet.imagelinks}/>;
+        return <Tweet key={tweet._id} id={tweet._id} userid={tweet.author} content={tweet.message} likes={tweet.likescount} upd={tweet.updatedAt} pimg={users[tweet.author].profilePic} user={users[tweet.author].name} comm={tweet.commentscount} vid={tweet.videolinks} img={tweet.imagelinks}/>;
       }) : ''} 
     </div>
     );
@@ -52,6 +71,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
       fetchAllTweets: () => dispatch(fetchAllTweets()),
+      getUserData: (payload) => dispatch(getUserData(payload)),
     };
 };
 

@@ -1,4 +1,5 @@
 import {CREATE_TWEET_LOAD,CREATE_TWEET_SUCCESS,CREATE_TWEET_FAIL,UPD_TWEET_LOAD,UPD_TWEET_SUCCESS,UPD_TWEET_FAIL,DEL_TWEET_LOAD,DEL_TWEET_SUCCESS,DEL_TWEET_FAIL} from './types';
+import {BASE} from './baseurl';
 export const  createTweet = (payload) => dispatch => {
 
     console.log(payload);
@@ -13,7 +14,7 @@ export const  createTweet = (payload) => dispatch => {
         isLoading:true,
     });
 
-    fetch('https://twitter-clone-mukul.herokuapp.com/mytweet/',request)
+    fetch(`${BASE}/tweet`,request)
     .then(response => response.json()).then(data => {
       console.log(data); 
       if(data.status === 200)
@@ -27,16 +28,10 @@ export const  createTweet = (payload) => dispatch => {
       }
       else
       {
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log(res);
           dispatch({
             type:CREATE_TWEET_FAIL,
             isLoading:false,
-            payload : res,
+            payload : data,
             done : 0,
           })
       }
@@ -65,7 +60,7 @@ export const  updateTweet = (payload) => dispatch => {
         isLoading:true,
     });
 
-    fetch('https://twitter-clone-mukul.herokuapp.com/mytweet/update/'+payload.id+'/',request)
+    fetch(`${BASE}/tweet?tweet_id=${payload.tweet_id}`,request)
     .then(response => {
       console.log(response);
       const responseJson = response.json().then(data => {
@@ -81,16 +76,10 @@ export const  updateTweet = (payload) => dispatch => {
       }
       else
       {
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log(res);
           dispatch({
             type:UPD_TWEET_FAIL,
             isLoading:false,
-            payload : res,
+            payload : data,
             done : 0,
           })
       }
@@ -98,17 +87,10 @@ export const  updateTweet = (payload) => dispatch => {
     })
     .catch(error => {
       const responseJson = error.json().then(data => {
-          console.log(data);
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log('error'+res)
           dispatch({
             type:UPD_TWEET_FAIL,
             isLoading:false,
-            payload : res,
+            payload : data,
             done : 0,
           })
         })
@@ -128,7 +110,7 @@ export const  deleteTweet = (payload) => dispatch => {
         isLoading:true,
     });
 
-    fetch('https://twitter-clone-mukul.herokuapp.com/mytweet/delete/'+payload.id+'/',request)
+    fetch(`${BASE}/tweet?tweet_id=${payload.tweet_id}`,request)
     .then(response => {
       console.log(response);
       if(response.status === 204)
@@ -142,36 +124,22 @@ export const  deleteTweet = (payload) => dispatch => {
       }
       else
       {
-          let res = '';
-          for(let key in response)
-          {
-              res=res+key+','+response[key]+'.';
-          }
-          console.log(res);
           dispatch({
             type:DEL_TWEET_FAIL,
             isLoading:false,
-            payload : res,
+            payload : response,
             done : 0,
           })
       }
     })
     .catch(error => {
-      const responseJson = error.json().then(data => {
-          console.log(data);
-          let res = '';
-          for(let key in data)
-          {
-              res=res+key+','+data[key]+'.';
-          }
-          console.log('error'+res)
+      console.log(error);
           dispatch({
             type:DEL_TWEET_FAIL,
             isLoading:false,
-            payload : res,
+            payload : error,
             done : 0,
           })
-        })
     });
 }
 

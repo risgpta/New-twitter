@@ -2,10 +2,15 @@ import React from 'react';
 
 import profile from '../assets/person.svg'; 
 
-const ProfilePic = () =>{
+const ProfilePic = (props) =>{
     return (
         <div>
-            <img className="profilePic" src={profile}/>
+            {
+                props.image ? 
+                <img className="profilePic" src={props.image}/>
+                :
+                <img className="profilePic" src={profile}/>
+            }
         </div>
     );
 }

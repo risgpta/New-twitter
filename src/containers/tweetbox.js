@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import ProfilePic from '../components/profilePic'
 import addPicture from '../assets/target.svg'
 import addVideo from '../assets/screen-player.svg'
+import cut from '../assets/delete.svg'
 import { connect } from 'react-redux'
 import Loader from '../components/loader';
 
@@ -9,18 +10,34 @@ import {goToProfile} from '../actions/miscAction'
 import '../App.css';
 
 import {createTweet} from '../actions/tweetAction';
+import {fetchProfile} from '../actions/profileAction';
 
 const TweetBox = (props) => {
 
     const [data,setData] = useState(null);
 
+    const [multi,setMulti] = useState(null);
+
     const postTweet = (e) => {
         e.preventDefault();
         let form_data = new FormData();
-        for(let key in data)
+
+        form_data.append('message', data['message']);
+
+        if(multi === 'img')
         {
-            form_data.append(key, data[key]);
+            console.log(data['imagelinks'])
+            for(let i=0;i< data['imagelinks'].length;i++)
+            {
+                console.log(data['imagelinks'][i])
+                form_data.append('imagelinks',data['imagelinks'][i]);
+            }
         }
+        else if(multi === 'vid')
+        {
+            form_data.append('videolinks', data['videolinks']);
+        }
+        
         console.log(form_data);
         let putdata = {
             data : form_data,
@@ -30,6 +47,8 @@ const TweetBox = (props) => {
     }
 
     const change = (key,value) => {
+        console.log(key);
+        console.log(value);
         setData({
             ...data,
             [key] : value,
@@ -39,6 +58,14 @@ const TweetBox = (props) => {
     const gotoprofile = () => {
         props.goToProfile(props.profile);
     }
+
+  useEffect(() => {
+    const data = {
+        username : localStorage.getItem('username'),
+      }
+      props.fetchProfile(data);
+      console.log(props.profileData);
+  },[]);
 
     return(
         <div className="tweetbox">
@@ -50,27 +77,37 @@ const TweetBox = (props) => {
             :
             <div style={{display:'flex'}}>
              <div style={{cursor:'pointer'}} onClick={() => gotoprofile()}>
-            <ProfilePic />
+            <ProfilePic image={props.profileData ? props.profileData.profile.profilePic : ''}/>
             </div>
             <form class="tweetboxform">
-            <textarea id="tweetContent" onChange={(e) => change("content",e.target.value)} name="content" rows="5" cols="30" placeholder="What's happening?" className="textArea"></textarea>
-            <div></div>
-            <input type="file"
-                   id="postImage"
-                   className = "imageUpload"
-                   onChange ={(e) => change("image",e.target.files[0])}
-                    />
-            <label className="uploadImage" htmlFor="postImage"><img src={addPicture} style={{height:'30px', width:'30px', display:'inline', margin:'auto'}}/></label>
-            <input type="file"
-                   id="postVideo"
-                   className = "imageUpload"
-                   onChange ={(e) => change("video",e.target.files[0])}
-                    />
-            <label className="uploadImage" htmlFor="postVideo"><img src={addVideo} style={{height:'30px', width:'30px', display:'inline', margin:'auto'}}/></label>
-            <input className="smallbtn2" onClick={e => postTweet(e)}  type="submit" value={'Tweet'}/>
+            <textarea id="tweetContent" onChange={(e) => change("message",e.target.value)} name="content" rows="5" cols="30" placeholder="What's happening?" className="textArea"></textarea>
             </form>
             </div>
             }
+            <div>
+                <div onClick={() => setMulti(null)} style={{position:'relative',bottom:'218px',left:'400px'}}>
+                {
+                    multi ?
+                    <img src={cut} className="multibtn"/>
+                    :
+                    ''
+                }
+                </div>
+            <input type="file"
+                   id="postImage"
+                   className = "imageUpload"
+                   onChange ={(e) => change("imagelinks",e.target.files)}
+                   multiple
+                    />
+            <label onClick={() => setMulti('img')} style={multi === 'vid' ? {pointerEvents: 'none',opacity: '0.35'} : {}} className="uploadImage" htmlFor="postImage"><img src={addPicture} className="multibtn"/></label>
+            <input type="file"
+                   id="postVideo"
+                   className = "imageUpload"
+                   onChange ={(e) => change("videolinks",e.target.files[0])}
+                    />
+            <label onClick={() => setMulti('vid')}  style={multi === 'img' ? {pointerEvents: 'none',opacity: '0.35'} : {}}  className="uploadImage" htmlFor="postVideo"><img src={addVideo}  className="multibtn"/></label>
+            <input className="smallbtn2" onClick={e => postTweet(e)}  type="submit" value={'Tweet'}/>
+            </div>
         </div>
     );
 }
@@ -79,12 +116,15 @@ const TweetBox = (props) => {
 const mapStateToProps = (state) => ({
     Loading : state.tweetReducer.isLoading,
     success : state.loginReducer.done, 
+    profile : state.miscActionReducer.profile,
+    profileData : state.profileReducer.data,
 })
 
 const mapDispatchToProps = (dispatch) => {
     return {
       createTweet: (payload) => dispatch(createTweet(payload)),
       goToProfile: (payload) => dispatch(goToProfile(payload)),
+      fetchProfile: (payload) => dispatch(fetchProfile(payload)),
     };
 };
 

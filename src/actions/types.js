@@ -28,6 +28,8 @@ export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 export const CHANGE_TWEET_PAGE = 'CHANGE_TWEET_PAGE';
 /*profile*/
 export const GO_TO_PROFILE = 'GO_TO_PROFILE';
+/*user data*/
+export const USER_DATA = 'USER_DATA';
 
 /*profile*/
 export const GET_PROFILE_LOAD = 'GET_PROFILE_LOAD';

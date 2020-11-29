@@ -1,8 +1,9 @@
-import {CHANGE_TWEET_PAGE,GO_TO_PROFILE} from '../actions/types';
+import {CHANGE_TWEET_PAGE,GO_TO_PROFILE,USER_DATA} from '../actions/types';
 
 const initialState = {
     flag : true,
     profile : false,
+    userData : {},
 }
 
 export default function(state = initialState,action){
@@ -16,6 +17,11 @@ export default function(state = initialState,action){
             return{
                 ...state,
                 profile : action.payload
+            }
+        case USER_DATA:
+            return{
+                ...state,
+                userData : action.payload 
             }
         default : 
         return state;

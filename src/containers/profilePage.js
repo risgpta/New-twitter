@@ -6,6 +6,7 @@ import '../App.css';
 import email from '../assets/email.svg'
 import { connect } from 'react-redux'
 import Loader from '../components/loader';
+import MyTweetList from './mytweetList';
 
 import addPicture from '../assets/target.svg'
 
@@ -74,7 +75,7 @@ const ProfilePage = (props) => {
          {
          props.Loading === true ? <Loader/> :  profile === null ? '' : 
            
-            <div>
+            <div className="profileDiv">
             {
                 edit == false ?
                 <img className="profilePicProfile" src={profile ? profile.profilePic : ''}/>
@@ -107,6 +108,7 @@ const ProfilePage = (props) => {
             </div>
             </div>
          }
+         <MyTweetList/>
         </div>
     );
     
