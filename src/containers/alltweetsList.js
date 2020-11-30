@@ -54,7 +54,7 @@ const AllTweetList = (props) => {
     return(
          <div>
          {props.Loading === true ? <Loader/> : tweets ? tweets.map(tweet => {
-        return <Tweet key={tweet._id} id={tweet._id} userid={tweet.author} content={tweet.message} likes={tweet.likescount} upd={tweet.updatedAt} pimg={users[tweet.author].profilePic} user={users[tweet.author].name} comm={tweet.commentscount} vid={tweet.videolinks} img={tweet.imagelinks}/>;
+        return <Tweet key={tweet._id} id={tweet._id} userid={tweet.author} content={tweet.message} like_flag={tweet.like_flag} likes={tweet.likescount} upd={tweet.createdAt} pimg={users[tweet.author].profilePic} user={users[tweet.author].name} comm={tweet.commentscount} vid={tweet.videolinks} img={tweet.imagelinks}/>;
       }) : ''} 
     </div>
     );

@@ -8,6 +8,7 @@ import signupReducer from './signupReducer';
 import miscActionReducer from './miscActionReducer';
 import profileReducer from './profileReducer'; 
 import tweetReducer from './tweetReducer';
+import likeReducer from './likeReducer';
 
 export default combineReducers({
    posts: postReducer, 
@@ -19,4 +20,5 @@ export default combineReducers({
    miscActionReducer,
    profileReducer,
    tweetReducer,
+   likeReducer,
 });

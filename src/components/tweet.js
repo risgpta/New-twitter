@@ -6,6 +6,7 @@ import unlike from '../assets/unlikeheart.svg'
 
 import { connect } from 'react-redux';
 import {deleteTweet,updateTweet} from '../actions/tweetAction';
+import {likeTweet,fetchLikeList} from '../actions/likeAction';
 
 import '../App.css';
 
@@ -35,18 +36,13 @@ const Tweet = (props) => {
     function likePost(id)
     {
         let putdata = {
-            token : localStorage.getItem('token'),
             id:id,
             body : JSON.stringify({
-                ...data,
-                likes : props.likes+1,
+                flag: props.like_flag ? -1 : 1,
+                _id : id,
             }),
         }
-        setData({
-            ...data,
-            likes : props.likes+1,
-        })
-        props.updateTweet(putdata);
+        props.likeTweet(putdata);
     }
 
     useEffect(()=>{
@@ -98,6 +94,16 @@ const Tweet = (props) => {
             setEdit(false);
         }
     },[editTweetid]);
+
+    useEffect(() => {
+        if(props.Likelist === null)
+        {
+            let data = {
+                tweet_id:props.id,
+            }
+            props.fetchLikeList(data);
+        }
+    },[props.Likelist])
 
     let time = props.upd;   
     let date = time.split('T');
@@ -178,7 +184,7 @@ const Tweet = (props) => {
                 vid_item
             }
             </div>
-            <div className="likes"><img  onClick={() => likePost(props.id)}  src={ props.likes > 0 ? like : unlike} alt="like" style={{height:'30px', width:'30px', display:'inline', margin:'auto'}}/>
+            <div className="likes"><img  onClick={() => likePost(props.id)}  src={ props.like_flag === true ? like : unlike} alt="like" style={{height:'30px', width:'30px', display:'inline', margin:'auto',cursor:'pointer'}}/>
             {props.likes > 0 ? props.likes+' people liked it' : 'Be the first to like this'}
             {props.comm > 0 ? props.comm+' people commented on it' : 'Be the first to comment on this'}
             </div>
@@ -190,12 +196,15 @@ const Tweet = (props) => {
 
 const mapStateToProps = (state) => ({
     Loading : state.tweetReducer.isLoading,
+    Likelist : state.likeReducer.data,
 })
 
 const mapDispatchToProps = (dispatch) => {
     return {
       deleteTweet: (payload) => dispatch(deleteTweet(payload)),
       updateTweet: (payload) => dispatch(updateTweet(payload)),
+      likeTweet: (payload) => dispatch(likeTweet(payload)),
+      fetchLikeList: (payload) => dispatch(fetchLikeList(payload)),
     };
 };
 

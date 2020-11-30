@@ -53,3 +53,11 @@ export const UPD_TWEET_FAIL = 'UPD_TWEET_FAIL';
 export const DEL_TWEET_LOAD = 'DEL_TWEET_LOAD';
 export const DEL_TWEET_SUCCESS = 'DEL_TWEET_SUCCESS';
 export const DEL_TWEET_FAIL = 'DEL_TWEET_FAIL';
+
+/*like*/
+export const LIKE_TWEET = 'LIKE_TWEET';
+
+/*get like list*/
+export const GET_LIKE_LIST_LOAD = 'GET_LIKE_LIST_LOAD';
+export const GET_LIKE_LIST_SUCCESS = 'GET_LIKE_LIST_SUCCESS';
+export const GET_LIKE_LIST_FAIL = 'GET_LIKE_LIST_FAIL';
