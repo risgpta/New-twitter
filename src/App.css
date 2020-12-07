@@ -338,7 +338,7 @@ scrollbar-width: none;  /* Firefox */
 
 .user>img{
   vertical-align: text-bottom;
-  padding: 1px 10px;
+  margin: 1px 10px;
 }
 
 .tweetContent{
@@ -451,6 +451,17 @@ scrollbar-width: none;  /* Firefox */
   width:60px;
   display:inline;
   margin:20px;
+  border: 1px solid #c7d9f0;
+}
+
+.usertweetpic{
+  height: 30px;
+  width: 30px;
+  display: inline;
+  margin: auto;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #c7d9f0;
 }
 
 .imageUpload{
@@ -588,6 +599,7 @@ scrollbar-width: none;  /* Firefox */
   width: -webkit-fill-available;
   display: block;
   margin: auto;
+  border: 1px solid #c7d9f03b;
 }
 
 .videoDiv{
@@ -651,8 +663,8 @@ scrollbar-width: none;  /* Firefox */
   cursor: pointer;
   position: relative;
   width: auto;
-  padding: 16px;
-  color: #1ea2f1;
+  padding: 11px;
+  color: #c7d9f0;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
@@ -665,13 +677,20 @@ scrollbar-width: none;  /* Firefox */
 
 /* Position the "next button" to the right */
 .next {
-  left : 450px;
   border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
+}
+
+.slideImage{
+  margin: 20px auto;
+  display: block;
+  width: fit-content;
+  position: relative;
+  bottom: 10px;
 }
 
 .mainTweet{

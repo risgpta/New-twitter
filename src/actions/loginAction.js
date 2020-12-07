@@ -21,6 +21,7 @@ export const  login = (payload) => dispatch => {
         localStorage.setItem('name',data.user_info.name);
         localStorage.setItem('username',data.user_info.username);
         localStorage.setItem('email',data.user_info.email);
+        localStorage.setItem('userPic',data.user_info.profile.profilePic);
         dispatch({
             type:LOGIN_SUCCESS,
             isLoading:false,

@@ -19,7 +19,7 @@ const AllTweetList = (props) => {
             console.log(props.allTweets);
 
             //taking data from users
-            let userData = props.allTweets.message.users;
+            let userData = props.allTweets.message.users || [];
             let user_data = {};
 
             for(let item of userData)
@@ -46,13 +46,13 @@ const AllTweetList = (props) => {
             props.fetchAllTweets();
     },[props.success]);
 
-   /* useEffect(() => {
+    useEffect(() => {
         props.fetchAllTweets();
-    },[props.update]);*/
+    },[props.update]);
 
 
     return(
-         <div>
+         <div style={{marginBottom : '100px'}}>
          {props.Loading === true ? <Loader/> : tweets ? tweets.map(tweet => {
         return <Tweet key={tweet._id} id={tweet._id} userid={tweet.author} content={tweet.message} like_flag={tweet.like_flag} likes={tweet.likescount} upd={tweet.createdAt} pimg={users[tweet.author].profilePic} user={users[tweet.author].name} comm={tweet.commentscount} vid={tweet.videolinks} img={tweet.imagelinks}/>;
       }) : ''} 
@@ -66,6 +66,7 @@ const mapStateToProps = (state) => ({
     allTweets : state.allTweetsReducer.data,
     Loading : state.allTweetsReducer.isLoading,
     success : state.loginReducer.done, 
+    update : state.tweetReducer.isLoading,
 })
 
 const mapDispatchToProps = (dispatch) => {

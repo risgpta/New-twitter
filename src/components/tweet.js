@@ -22,6 +22,8 @@ const Tweet = (props) => {
     const [editTweetid,setEditTweetid] = useState(null);
     const [edit,setEdit] = useState(false);
 
+    const [imgV,setImgV] = useState(0);
+
     const [showopt,setshowopt] = useState(false);
 
     function deletePost(id){
@@ -114,9 +116,14 @@ const Tweet = (props) => {
 
     if(props.img.length)
     {
-        for(let item of props.img)
+        for(let i=0; i<props.img.length; i++)
         {
-            image_item.push(<img  src={item} alt="image" className="tweetPostImage"/> );
+            image_item.push(
+                imgV === i ?
+                <img  src={props.img[i]} alt="image" className="tweetPostImage"/> 
+                :
+                ''
+            );
         }
     }
 
@@ -157,7 +164,7 @@ const Tweet = (props) => {
     return (
         <div className="tweet">
           <div className="aboveTweet">
-            <div className="user" ><img  src={props.pimg === null ? profile : props.pimg} alt="profile" style={{height:'30px', width:'30px', display:'inline', margin:'auto',borderRadius:'50%',verticalAlign: 'middle'}}/>{props.user}</div>
+            <div className="user" ><img  src={props.pimg === null ? profile : props.pimg} alt="profile" className="usertweetpic" />{props.user}</div>
             <div className="tweetTime">{ Update_time.toLocaleTimeString('en-US', { hour: 'numeric',minute:'numeric', hour12: true })} · {Update_date.toLocaleDateString('en-US', {day: 'numeric',month: 'short',year: 'numeric'})}</div>
             <Options/>
             </div>
@@ -172,13 +179,30 @@ const Tweet = (props) => {
                 image_item
             }
             {
-                image_item.length > 0 ?
-                <span>
-                <a class="prev" >&#10094;</a>
-                <a class="next" >&#10095;</a>
+                image_item.length > 1 ?
+                <span className="slideImage">
+                {
+                    imgV === 1 || imgV === 2 ?
+                    <a onClick={() => setImgV(imgV-1)} class="prev" >&#10094;</a>
+                    :
+                    ''
+                }
+                {
+                    imgV === 0 || imgV === 1 && image_item.length > 2 ?
+                    <a onClick={() => setImgV(imgV+1)} class="next" >&#10095;</a>
+                    :
+                    ''
+                }
                 </span>
                 :
                 ''
+            }
+            {/*
+                image_item.length > 1?
+                <span>{imgV+1}/{image_item.length}</span>
+                :
+                ''
+            */
             }
             {
                 vid_item

@@ -8,7 +8,12 @@ const Sidebar = (props) => {
 
 
     function logout(){
-        localStorage.clear();
+        localStorage.removeItem('token');
+        localStorage.removeItem('userid');
+        localStorage.removeItem('name');
+        localStorage.removeItem('username');
+        localStorage.removeItem('email');
+        localStorage.removeItem('userPic');
         props.logout();
     }
 

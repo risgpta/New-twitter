@@ -17,8 +17,8 @@ export const  fetchLikeList = (payload) => dispatch => {
     fetch(`${BASE}/tweet/tweet-like?_id=${payload.tweet_id}`,request)
     .then(response => {
       response.json().then(data => {
-          console.log(payload.tweet_id);
-          console.log(data);
+          //console.log(payload.tweet_id);
+          //console.log(data);
       if(response.status === 200)
       {
           dispatch({

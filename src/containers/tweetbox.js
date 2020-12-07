@@ -59,13 +59,7 @@ const TweetBox = (props) => {
         props.goToProfile(props.profile);
     }
 
-  useEffect(() => {
-    const data = {
-        username : localStorage.getItem('username'),
-      }
-      props.fetchProfile(data);
-      console.log(props.profileData);
-  },[]);
+    console.log(data);
 
     return(
         <div className="tweetbox">
@@ -75,17 +69,43 @@ const TweetBox = (props) => {
             localStorage.getItem('username') === null || localStorage.getItem('username') === undefined  ? 
             <h3 style={{fontFamily: 'Avenir-Medium',margin: 'auto',color: '#073f63'}}>Login to start tweeting!</h3>
             :
+            <div>
             <div style={{display:'flex'}}>
              <div style={{cursor:'pointer'}} onClick={() => gotoprofile()}>
-            <ProfilePic image={props.profileData ? props.profileData.profile.profilePic : ''}/>
+            <ProfilePic image={localStorage.getItem('userPic')}/>
             </div>
             <form class="tweetboxform">
             <textarea id="tweetContent" onChange={(e) => change("message",e.target.value)} name="content" rows="5" cols="30" placeholder="What's happening?" className="textArea"></textarea>
             </form>
             </div>
+            {
+                data && data.imagelinks && data.imagelinks.length > 0 && multi === 'img'?
+                <img className="tweetPostImage" src={URL.createObjectURL(data.imagelinks[0])} />
+                :
+                ''
+            }
+            {
+                data && data.imagelinks && data.imagelinks.length > 1 && multi === 'img'?
+                <img className="tweetPostImage" src={URL.createObjectURL(data.imagelinks[1])} />
+                :
+                ''
+            }
+            {
+                data && data.imagelinks && data.imagelinks.length > 2 && multi === 'img'?
+                <img className="tweetPostImage" src={URL.createObjectURL(data.imagelinks[2])} />
+                :
+                ''
+            }
+            {
+                data && data.videolinks &&  multi === 'vid'?
+                <video className="videoDiv"controls>
+                <source src={URL.createObjectURL(data.videolinks)} />
+                </video>
+                :
+                ''
             }
             <div>
-                <div onClick={() => setMulti(null)} style={{position:'relative',bottom:'218px',left:'400px'}}>
+                <div onClick={() => setMulti(null)} style={{position:'relative',top:'60px',left:'400px'}}>
                 {
                     multi ?
                     <img src={cut} className="multibtn"/>
@@ -108,6 +128,8 @@ const TweetBox = (props) => {
             <label onClick={() => setMulti('vid')}  style={multi === 'img' ? {pointerEvents: 'none',opacity: '0.35'} : {}}  className="uploadImage" htmlFor="postVideo"><img src={addVideo}  className="multibtn"/></label>
             <input className="smallbtn2" onClick={e => postTweet(e)}  type="submit" value={'Tweet'}/>
             </div>
+            </div>
+             }
         </div>
     );
 }
@@ -115,16 +137,16 @@ const TweetBox = (props) => {
 
 const mapStateToProps = (state) => ({
     Loading : state.tweetReducer.isLoading,
-    success : state.loginReducer.done, 
+    LoginLoading : state.loginReducer.isLoading,
+    success : state.loginReducer.done,
+    LoginData : state.loginReducer.data, 
     profile : state.miscActionReducer.profile,
-    profileData : state.profileReducer.data,
 })
 
 const mapDispatchToProps = (dispatch) => {
     return {
       createTweet: (payload) => dispatch(createTweet(payload)),
       goToProfile: (payload) => dispatch(goToProfile(payload)),
-      fetchProfile: (payload) => dispatch(fetchProfile(payload)),
     };
 };
 

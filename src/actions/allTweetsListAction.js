@@ -27,9 +27,10 @@ export const  fetchAllTweets = () => dispatch => {
         isLoading:true,
     });
 
-    fetch(`${BASE}/tweet/alltweets?page=1`,request)
+    fetch(`${BASE}/tweet/alltweets`,request)
     .then(response => {
       response.json().then(data => {
+        console.log(data);
       if(response.status === 200)
       {
           dispatch({
