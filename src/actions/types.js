@@ -61,3 +61,6 @@ export const LIKE_TWEET = 'LIKE_TWEET';
 export const GET_LIKE_LIST_LOAD = 'GET_LIKE_LIST_LOAD';
 export const GET_LIKE_LIST_SUCCESS = 'GET_LIKE_LIST_SUCCESS';
 export const GET_LIKE_LIST_FAIL = 'GET_LIKE_LIST_FAIL';
+
+/*progressive load*/
+export const LOAD_DATA = 'LOAD_DATA';

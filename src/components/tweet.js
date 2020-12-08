@@ -98,7 +98,7 @@ const Tweet = (props) => {
     },[editTweetid]);
 
     useEffect(() => {
-        if(props.Likelist === null)
+        if(props.Likelist === null && localStorage.getItem('username'))
         {
             let data = {
                 tweet_id:props.id,
@@ -107,14 +107,14 @@ const Tweet = (props) => {
         }
     },[props.Likelist])
 
-    let time = props.upd;   
+    let time = props.upd || '';   
     let date = time.split('T');
     const Update_date = new Date(date[0]);
     let Update_time = new Date(time);
 
     let image_item = [];
 
-    if(props.img.length)
+    if(props.img && props.img.length)
     {
         for(let i=0; i<props.img.length; i++)
         {

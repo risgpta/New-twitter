@@ -2,10 +2,13 @@ import {ALL_TWEETS_LOAD,ALL_TWEETS_SUCCESS,ALL_TWEETS_FAIL} from '../actions/typ
 
 const initialState = {
     isLoading : false,
-    data : null,  
+    tweets : [],
+    users : [],
+    data : null, 
 }
 
 export default function(state = initialState,action){
+
     switch(action.type){
         case ALL_TWEETS_LOAD:
                 return{
@@ -16,7 +19,8 @@ export default function(state = initialState,action){
                 return{
                     ...state,
                     isLoading : false,
-                    data:action.payload,
+                    tweets : [...initialState.tweets,...action.tweets],
+                    users : [...initialState.users,...action.users],
                 }
         case ALL_TWEETS_FAIL:
                 return{

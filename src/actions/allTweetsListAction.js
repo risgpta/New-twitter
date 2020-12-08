@@ -1,7 +1,8 @@
 import {ALL_TWEETS_LOAD,ALL_TWEETS_SUCCESS,ALL_TWEETS_FAIL} from './types';
 import {BASE} from './baseurl';
+import { connect } from 'react-redux';
 
-export const  fetchAllTweets = () => dispatch => {
+export const  fetchAllTweets = (payload) => dispatch => {
 
   let request = {
     method: 'GET',
@@ -27,16 +28,18 @@ export const  fetchAllTweets = () => dispatch => {
         isLoading:true,
     });
 
-    fetch(`${BASE}/tweet/alltweets`,request)
+    fetch(`${BASE}/tweet/alltweets?page=${payload}`,request)
     .then(response => {
       response.json().then(data => {
+        console.log(payload);
         console.log(data);
       if(response.status === 200)
       {
           dispatch({
               type:ALL_TWEETS_SUCCESS,
               isLoading:false,
-              payload : data,
+              tweets : data.message.tweets,
+              users : data.message.users,
           })
       }
       else
@@ -59,3 +62,5 @@ export const  fetchAllTweets = () => dispatch => {
         })
     });
 }
+
+
