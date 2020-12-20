@@ -54,7 +54,7 @@ const MainArea = () => {
 
     const editRequest = {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json','Authorization':'Token '+localStorage.getItem('token')},
+      headers: { 'Content-Type': 'application/json','Authorization':'Token '+localStorage.getItem('twitter-token')},
       body: JSON.stringify(editData)
     };
 
@@ -79,7 +79,7 @@ const MainArea = () => {
 
     const request = {
         method: 'POST',
-        headers: {'Authorization':'Token '+localStorage.getItem('token')},
+        headers: {'Authorization':'Token '+localStorage.getItem('twitter-token')},
         body: tweet
       };
     
@@ -173,7 +173,7 @@ const MainArea = () => {
       },[tweet,mytweet,editTweet,editData])
 
 
-    //if(!localStorage.getItem('token'))
+    //if(!localStorage.getItem('twitter-token'))
     //return <Redirect to='/'/>
     return(
         <div id="main" className="mainArea">

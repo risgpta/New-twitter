@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import '../App.css';
 import Signup from './signup';
 import Login from './login';
+import CustomizedSnackbars from '../components/snackbar';
+import { openSnackbar } from '../actions/miscAction';
 
 function Header(props){
 
-    console.log(localStorage.getItem('token'))
+    console.log(localStorage.getItem('twitter-token'))
     return ( 
             <div className="header">
             <img src={logo} alt="logo" style={{height:'48px', width:'48px'}}/>
@@ -21,17 +23,18 @@ function Header(props){
             {
                 !localStorage.getItem('username')  ? <Login/> : ''
             }
+            <CustomizedSnackbars/>
             </div>
     );
 }
 
 const mapStateToProps = (state) => ({
-    success : state.loginReducer.done, 
+    data: state.loginReducer.data, 
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      
+        
     };
   };
   

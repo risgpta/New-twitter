@@ -71,7 +71,7 @@ const Tweet = (props) => {
         if(deleteTweetid !== null)
         {
             let data = {
-                token : localStorage.getItem('token'),
+                token : localStorage.getItem('twitter-token'),
                 tweet_id:deleteTweetid,
             }
             props.deleteTweet(data);   
@@ -87,7 +87,7 @@ const Tweet = (props) => {
         if(editTweetid !== null)
         {
             let putdata = {
-                token : localStorage.getItem('token'),
+                token : localStorage.getItem('twitter-token'),
                 tweet_id:editTweetid,
                 body : JSON.stringify(data),
             }
@@ -210,7 +210,7 @@ const Tweet = (props) => {
             </div>
             <div className="likes"><img  onClick={() => likePost(props.id)}  src={ props.like_flag === true ? like : unlike} alt="like" style={{height:'30px', width:'30px', display:'inline', margin:'auto',cursor:'pointer'}}/>
             {props.likes > 0 ? props.likes+' people liked it' : 'Be the first to like this'}
-            {props.comm > 0 ? props.comm+' people commented on it' : 'Be the first to comment on this'}
+            {/*props.comm > 0 ? props.comm+' people commented on it' : 'Be the first to comment on this'*/}
             </div>
         </div>
     );

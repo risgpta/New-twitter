@@ -1,10 +1,12 @@
-import {CHANGE_TWEET_PAGE,GO_TO_PROFILE,USER_DATA,LOAD_DATA} from '../actions/types';
+import {CHANGE_TWEET_PAGE,GO_TO_PROFILE,USER_DATA,USERNAME_DATA,LOAD_DATA,SNACK_BAR} from '../actions/types';
 
 const initialState = {
     flag : true,
     profile : false,
     userData : {},
     load : false,
+    open : {},
+    usernameData : {}
 }
 
 export default function(state = initialState,action){
@@ -24,10 +26,20 @@ export default function(state = initialState,action){
                 ...state,
                 userData : action.payload 
             }
+        case USERNAME_DATA:
+                return{
+                    ...state,
+                    usernameData : action.payload 
+                }
         case LOAD_DATA:
             return{
                     ...state,
                     load : action.payload 
+            }
+        case SNACK_BAR:
+            return{
+                    ...state,
+                    open : action.payload 
             }
         default : 
         return state;

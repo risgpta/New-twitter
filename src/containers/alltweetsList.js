@@ -1,7 +1,7 @@
 import React,{useEffect,useState,useRef} from 'react';
 import {fetchAllTweets} from '../actions/allTweetsListAction';
 import { connect } from 'react-redux'
-import {getUserData} from '../actions/miscAction'
+import {getUserData,getUsernameData} from '../actions/miscAction'
 import '../App.css';
 
 import Tweet from '../components/tweet';
@@ -13,6 +13,7 @@ const AllTweetList = (props) => {
     const [atweets,setaTweets] = useState([]);
 
     const [users,setUsers] = useState({});
+    const [usersname,setUsersname] = useState({});
 
     const [page,setPage] = useState(1);
 
@@ -24,6 +25,7 @@ const AllTweetList = (props) => {
                 //taking data from users
                 let userData = props.users || [];
                 let user_data = {...users};
+                let username_data = {...usersname};
                 for(let item of userData)
                 {
                     user_data[item._id] = {
@@ -31,10 +33,14 @@ const AllTweetList = (props) => {
                         "username" : item.username,
                         "profilePic" : item.profile.profilePic,
                     }
+
+                    username_data[item.username] = item._id;
+
                 }
                 console.log(user_data);
                 setUsers(user_data);
                 props.getUserData(user_data);
+                props.getUsernameData(username_data);
         }
     
     },[props.tweets]);
@@ -46,8 +52,11 @@ const AllTweetList = (props) => {
     },[props.success]);
 
     useEffect(() => {
+        setTweets([]);
         props.fetchAllTweets(1);
-    },[props.update]);
+        console.log('upadting...')
+        console.log(props.update)
+    },[props.update,props.doneLike]);
 
     useEffect(() => {
         if(props.load === true)
@@ -78,14 +87,16 @@ const mapStateToProps = (state) => ({
     users : state.allTweetsReducer.users,
     Loading : state.allTweetsReducer.isLoading,
     success : state.loginReducer.done, 
-    update : state.tweetReducer.isLoading,
+    update : state.tweetReducer.done,
     load : state.miscActionReducer.load,
+    doneLike : state.likeReducer.flag,
 })
 
 const mapDispatchToProps = (dispatch) => {
     return {
       fetchAllTweets: (payload) => dispatch(fetchAllTweets(payload)),
       getUserData: (payload) => dispatch(getUserData(payload)),
+      getUsernameData: (payload) => dispatch(getUsernameData(payload)),
     };
 };
 

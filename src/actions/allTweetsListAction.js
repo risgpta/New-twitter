@@ -10,17 +10,17 @@ export const  fetchAllTweets = (payload) => dispatch => {
   },
 };
 
-    if(localStorage.getItem('token'))
+    if(localStorage.getItem('twitter-token'))
     {
         request = {
           method: 'GET',
           headers: { 'Content-Type': 'application/json',
-          'Authorization' : 'token '+localStorage.getItem('token'),
+          'Authorization' : 'token '+localStorage.getItem('twitter-token'),
         },
       };
     }
 
-    console.log('id',localStorage.getItem('token'));
+    console.log('id',localStorage.getItem('twitter-token'));
     console.log(request);
 
     dispatch({

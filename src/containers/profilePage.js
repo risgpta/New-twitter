@@ -52,7 +52,7 @@ const ProfilePage = (props) => {
         console.log(form_data);
         let putdata = {
             data : form_data,
-            token : localStorage.getItem('token'),
+            token : localStorage.getItem('twitter-token'),
             username : localStorage.getItem('username'),
         }
         props.updateProfile(putdata);

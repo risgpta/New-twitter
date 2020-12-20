@@ -30,6 +30,7 @@ export const CHANGE_TWEET_PAGE = 'CHANGE_TWEET_PAGE';
 export const GO_TO_PROFILE = 'GO_TO_PROFILE';
 /*user data*/
 export const USER_DATA = 'USER_DATA';
+export const USERNAME_DATA = 'USERNAME_DATA';
 
 /*profile*/
 export const GET_PROFILE_LOAD = 'GET_PROFILE_LOAD';
@@ -64,3 +65,6 @@ export const GET_LIKE_LIST_FAIL = 'GET_LIKE_LIST_FAIL';
 
 /*progressive load*/
 export const LOAD_DATA = 'LOAD_DATA';
+
+/*snackbar*/
+export const SNACK_BAR = 'SNACK_BAR';

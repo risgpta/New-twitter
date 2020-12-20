@@ -2,7 +2,8 @@ import {CREATE_TWEET_LOAD,CREATE_TWEET_SUCCESS,CREATE_TWEET_FAIL,UPD_TWEET_LOAD,
 
 const initialState = {
     isLoading : false,
-    data : null,  
+    data : null, 
+    done: -1, 
 }
 
 export default function(state = initialState,action){
@@ -17,29 +18,34 @@ export default function(state = initialState,action){
                     ...state,
                     isLoading : false,
                     data:action.payload,
+                    done:action.done,
                 }
         case CREATE_TWEET_FAIL:
                 return{
                     ...state,
                     isLoading : false,
                     data:action.payload,
+                    done:action.done,
                 }
         case UPD_TWEET_LOAD:
                     return{
                         ...state,
                         isLoading : true,
+                        done:action.done,
                     }
         case UPD_TWEET_SUCCESS:
                     return{
                         ...state,
                         isLoading : false,
                         data:action.payload,
+                        done:action.done,
                     }
         case UPD_TWEET_FAIL:
                     return{
                         ...state,
                         isLoading : false,
                         data:action.payload,
+                        done:action.done,
                     }
         case DEL_TWEET_LOAD:
                     return{
@@ -51,12 +57,14 @@ export default function(state = initialState,action){
                         ...state,
                         isLoading : false,
                         data:action.payload,
+                        done:action.done,
                     }
         case DEL_TWEET_FAIL:
                     return{
                         ...state,
                         isLoading : false,
                         data:action.payload,
+                        done:action.done,
                     }
         default : 
         return state;

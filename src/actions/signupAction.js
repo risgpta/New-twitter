@@ -1,4 +1,4 @@
-import {SIGNUP_LOAD,SIGNUP_SUCCESS,SIGNUP_FAIL} from './types';
+import {SIGNUP_LOAD,SIGNUP_SUCCESS,SIGNUP_FAIL,SNACK_BAR} from './types';
 import {BASE} from './baseurl';
 export const  signup = (payload) => dispatch => {
     const request = {
@@ -26,6 +26,13 @@ export const  signup = (payload) => dispatch => {
             isLoading:false,
             payload : data,
             done : 1,
+        }) 
+        dispatch({
+          type:SNACK_BAR,
+          payload : {
+            type:1,
+            msg:"registered!",
+          }
         })        
       }
       else
@@ -36,6 +43,13 @@ export const  signup = (payload) => dispatch => {
             payload : data,
             done : -1,
           })
+          dispatch({
+            type:SNACK_BAR,
+            payload : {
+              type:0,
+              msg:data.message,
+            }
+          }) 
       }
     })   
     .catch(err => {
@@ -46,5 +60,12 @@ export const  signup = (payload) => dispatch => {
             payload : err,
             done : 0,
           })
+          dispatch({
+            type:SNACK_BAR,
+            payload : {
+              type:0,
+              msg:err.message,
+            }
+          }) 
     });
 }

@@ -5,7 +5,6 @@ import addVideo from '../assets/screen-player.svg'
 import cut from '../assets/delete.svg'
 import { connect } from 'react-redux'
 import Loader from '../components/loader';
-
 import {goToProfile} from '../actions/miscAction'
 import '../App.css';
 
@@ -17,6 +16,8 @@ const TweetBox = (props) => {
     const [data,setData] = useState(null);
 
     const [multi,setMulti] = useState(null);
+
+    const [rtdb,setRtdb] = useState(null);
 
     const postTweet = (e) => {
         e.preventDefault();
@@ -41,7 +42,7 @@ const TweetBox = (props) => {
         console.log(form_data);
         let putdata = {
             data : form_data,
-            token : localStorage.getItem('token'),
+            token : localStorage.getItem('twitter-token'),
         }
         props.createTweet(putdata);
     }

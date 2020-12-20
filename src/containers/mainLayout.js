@@ -50,6 +50,8 @@ const mapStateToProps = (state) => ({
     success : state.loginReducer.done, 
     load : state.miscActionReducer.load,
     tweets : state.allTweetsReducer.tweets,
+    update : state.tweetReducer.done, 
+    data: state.loginReducer.data, 
 });
   
 const mapDispatchToProps = (dispatch) => {

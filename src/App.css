@@ -42,7 +42,7 @@
 #loader {
   position: relative;
   left: 50%;
-  top: 8vh;
+  top: 20vh;
   z-index: 1;
   width: 100%;
   height: 100%;
@@ -54,6 +54,17 @@
   height: 40px;
   animation: spin 2s linear infinite;
   background-color: white;
+}
+
+.usernameChat{
+  padding: 10px;
+  text-align: center;
+  outline: none;
+  border-radius: 20px;
+  border: 1px solid #1ea2f1;
+  font-size: 15px;
+  font-family: Nunito;
+  font-weight: bold;
 }
 
 @-webkit-keyframes spin {
@@ -189,6 +200,25 @@
   outline:none;
 }
 
+.chatspace{
+  background: rgb(8 62 99 / 47%);
+    text-align: left;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    height: 350px;
+    overflow: auto;
+}
+
+.msg{
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid blue;
+  font-size: 15px;
+  font-family: Avenir-Light;
+  outline: none;
+}
+
 .formStyle{
   padding: 20px 60px;
 }
@@ -223,6 +253,7 @@
   background-color: rgb(30 162 241);
   color:white;
   outline: none;
+  text-align: center;
 }
 
 .header{
@@ -238,7 +269,7 @@
     font-weight: 600;
     color: rgb(8 62 99);
     font-family: Avenir-Medium;
-    width: 440px;
+    width: 700px;
     text-align: center;
 }
 .header > img{
@@ -366,16 +397,18 @@ scrollbar-width: none;  /* Firefox */
 
 .searchTweet{
   display: block;
-  margin: auto;
+  margin: 40px auto;
   margin-top: 50px;
   font-size: 14px;
+  width: -moz-fit-content;
   width: fit-content;
   border: 1px solid #073f63;
-  padding: 5px;
+  padding: 10px 20px;
   border-radius: 20px;
   outline: none;
-  margin-left: 26px;
   text-align: center;
+  background: #0c66c2;
+  color: white;
 }
 
 .smallbtn2{

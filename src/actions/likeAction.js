@@ -54,7 +54,7 @@ export const  likeTweet = (payload) => dispatch => {
     const request = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json',
-        'Authorization' : 'token '+localStorage.getItem('token'),
+        'Authorization' : 'token '+localStorage.getItem('twitter-token'),
       },
         body: payload.body,
     };

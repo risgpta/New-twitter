@@ -31,7 +31,7 @@ export default function(state = initialState,action){
             return{
                 ...state,
                 isLoading : false,
-                data : null,
+                data : action.payload,
                 done : 0,
             }
         default : 

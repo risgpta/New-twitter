@@ -1,4 +1,4 @@
-import {CREATE_TWEET_LOAD,CREATE_TWEET_SUCCESS,CREATE_TWEET_FAIL,UPD_TWEET_LOAD,UPD_TWEET_SUCCESS,UPD_TWEET_FAIL,DEL_TWEET_LOAD,DEL_TWEET_SUCCESS,DEL_TWEET_FAIL} from './types';
+import {CREATE_TWEET_LOAD,CREATE_TWEET_SUCCESS,CREATE_TWEET_FAIL,UPD_TWEET_LOAD,UPD_TWEET_SUCCESS,UPD_TWEET_FAIL,DEL_TWEET_LOAD,DEL_TWEET_SUCCESS,DEL_TWEET_FAIL,SNACK_BAR} from './types';
 import {BASE} from './baseurl';
 export const  createTweet = (payload) => dispatch => {
 
@@ -24,7 +24,14 @@ export const  createTweet = (payload) => dispatch => {
             isLoading:false,
             payload : data,
             done : 1,
-        })        
+        })
+        dispatch({
+          type:SNACK_BAR,
+          payload : {
+            type:1,
+            msg:"Posted!"
+          }
+        })         
       }
       else
       {
@@ -34,6 +41,13 @@ export const  createTweet = (payload) => dispatch => {
             payload : data,
             done : 0,
           })
+          dispatch({
+            type:SNACK_BAR,
+            payload : {
+              type:0,
+              msg:"Post unsuccessful!"
+            }
+          }) 
       }
     })   
     .catch(err => {

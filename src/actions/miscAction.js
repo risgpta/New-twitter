@@ -1,4 +1,4 @@
-import {CHANGE_TWEET_PAGE,GO_TO_PROFILE,USER_DATA,LOAD_DATA} from './types';
+import {CHANGE_TWEET_PAGE,GO_TO_PROFILE,USER_DATA,USERNAME_DATA,LOAD_DATA,SNACK_BAR} from './types';
 export const  changeTweetPage = (flag) => dispatch => {
      dispatch({
             type:CHANGE_TWEET_PAGE,
@@ -20,9 +20,23 @@ export const  getUserData = (data) => dispatch => {
        });
 }
 
+export const  getUsernameData = (data) => dispatch => {
+    dispatch({
+           type:USERNAME_DATA,
+           payload : data,
+       });
+}
+
 export const  loadData = (load) => dispatch => {
     dispatch({
            type:LOAD_DATA,
            payload : !load,
+       });
+}
+
+export const  openSnackbar = (data) => dispatch => {
+    dispatch({
+           type:SNACK_BAR,
+           payload : data,
        });
 }

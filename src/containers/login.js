@@ -35,7 +35,7 @@ function Login(props) {
     {
       if(props.success === -1)
       {
-        alert('something went wrong...');
+        console.log('something went wrong...');
       }
       else
       {

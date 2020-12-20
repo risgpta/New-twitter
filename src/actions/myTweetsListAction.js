@@ -4,12 +4,12 @@ import {BASE} from './baseurl';
 
 export const  fetchMyTweets = () => dispatch => {
     
-    console.log('token-',localStorage.getItem('token'));
+    console.log('token-',localStorage.getItem('twitter-token'));
     console.log('userid-',localStorage.getItem('userid'));
     const request = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json',
-        'Authorization' : 'token '+localStorage.getItem('token'),
+        'Authorization' : 'token '+localStorage.getItem('twitter-token'),
         },
     };
 
