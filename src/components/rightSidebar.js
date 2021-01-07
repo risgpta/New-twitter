@@ -111,6 +111,7 @@ const RightSidebar = (props) => {
 
 const mapStateToProps = (state) => ({
     user : state.miscActionReducer.usernameData,
+    logout : state.loginReducer.done,
 })
 
 const mapDispatchToProps = (dispatch) => {

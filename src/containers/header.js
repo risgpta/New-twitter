@@ -14,7 +14,7 @@ function Header(props){
             <div className="header">
             <img src={logo} alt="logo" style={{height:'48px', width:'48px'}}/>
             {
-                !localStorage.getItem('username')  ? <div className="headerContent">Home</div>:<div className="headerContent">Hey Welcome {localStorage.getItem('username')}! 
+                !localStorage.getItem('username')  ? <div className="headerContent"></div>:<div className="headerContent">Hey Welcome {localStorage.getItem('username')}! 
                 </div>
             }
             {
@@ -29,7 +29,8 @@ function Header(props){
 }
 
 const mapStateToProps = (state) => ({
-    data: state.loginReducer.data, 
+    data: state.loginReducer.data,
+    logout : state.loginReducer.done, 
 });
 
 const mapDispatchToProps = (dispatch) => {

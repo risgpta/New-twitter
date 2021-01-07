@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import {logout} from '../actions/loginAction';
 import { connect } from 'react-redux';
 import '../App.css';
@@ -30,7 +30,44 @@ const Sidebar = (props) => {
        console.log('wip');
     }
 
+    let width = window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth;
+
+    const [show,setShow] = useState(width > 996 ? true : false);
+    const Show = () => {
+        setShow(!show);
+        console.log('sow');
+    }
+
     return(
+        width < 996 ?
+        <div className="sidebarMobile" onClick={() => Show()}>
+            . . .
+            {
+                show ? 
+                <div className="sidebarDiv">
+                <div className="sidebarOptions">#Explore</div>
+                {
+                    localStorage.getItem('username') === null || localStorage.getItem('username') === undefined ?  '' 
+                    :
+                    <div className="mobileSec">
+                    <div className="sidebarOptions" onClick={() => message()}>Messages</div>
+                    {
+                        props.profile === false ?
+                        <div onClick={goTomytweets}  className="sidebarOptions">{props.flag ? 'My tweets' : 'All tweets'}</div>
+                        :
+                        <div onClick={gotoProfile}  className="sidebarOptions">Home</div>
+                    }
+                    <div onClick={logout} className="sidebarOptions">log out</div>
+                    </div>
+                }
+                </div>
+            :
+            ''
+            }
+        </div>
+        :
         <div className="sidebar">
             <div className="sidebarDiv">
             <div className="sidebarOptions">#Explore</div>
@@ -58,6 +95,7 @@ const mapStateToProps = (state) => ({
     profile : state.miscActionReducer.profile,
     success : state.loginReducer.done, 
     data: state.loginReducer.data, 
+    logout : state.loginReducer.done,
   })
   
 const mapDispatchToProps = (dispatch) => {

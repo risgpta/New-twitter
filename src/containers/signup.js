@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import Modal from 'react-modal';
 import {signup} from '../actions/signupAction';
+import {openSnackbar} from '../actions/miscAction';
 import '../App.css';
 import { connect } from 'react-redux';
 import logo from '../assets/twitter.svg'; 
@@ -44,6 +45,58 @@ function Signup(props) {
       userinfo[data.name] = data.value;
     }
     console.log(userinfo);
+    var regName = /^[a-zA-Z ]*$/;
+    var regNum = /[6789][0-9]{9}/;
+    var regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(userinfo.username.length === 0)
+    {
+      props.openSnackbar({
+        type : 0,
+        msg : 'Username cannot be empty',
+      })
+      return false;
+    }
+    if(userinfo.name.length === 0)
+    {
+      props.openSnackbar({
+        type : 0,
+        msg : 'Name cannot be empty',
+      })
+      return false;
+    }
+    if(userinfo.email.length === 0)
+    {
+      props.openSnackbar({
+        type : 0,
+        msg : 'Email cannot be empty',
+      })
+      return false;
+    }
+    if(userinfo.password.length < 8 || userinfo.password.length > 32)
+    {
+      props.openSnackbar({
+        type : 0,
+        msg : 'Password must have length between 8 and 32',
+      })
+      return false;
+    }
+
+    if(regName.test(userinfo.name) === false)
+    {
+      props.openSnackbar({
+        type : 0,
+        msg : 'Invalid Name',
+      })
+      return false;
+    }
+    if(regEmail.test(userinfo.email) === false)
+    {
+      props.openSnackbar({
+        type : 0,
+        msg : 'Invalid Email',
+      })
+      return false;
+    }
     setSignupdata(userinfo);
     closeSignup();
   }
@@ -91,6 +144,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     signup: (payload) => dispatch(signup(payload)),
+    openSnackbar : (payload) => dispatch(openSnackbar(payload))
   };
 };
 

@@ -114,6 +114,51 @@ const Tweet = (props) => {
 
     let image_item = [];
 
+    const time_show = [];
+
+    if(props.upd)
+    {
+        console.log(Update_time.toLocaleTimeString());
+        console.log(Update_date.toLocaleDateString('en-US'));
+        
+        let post_day = new Date(Update_date.toLocaleDateString('en-US')+' '+Update_time.toLocaleTimeString());
+        console.log(post_day);
+
+        let today = new Date();
+
+        let distance = today.getTime() - post_day.getTime();
+
+        console.log(distance);
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if(days > 0)
+        {
+            if(days > 365)
+            time_show.push(`About ${parseInt(days/365)} year ago`);
+            else if(days > 30)
+            time_show.push(`About ${parseInt(days/30)} month ago`);
+            else
+            time_show.push(`${days} days ago`);
+        }
+        else if(hours > 0)
+        {
+            time_show.push(`${hours}h ago`)
+        }
+        else if(minutes > 0)
+        {
+            time_show.push(`${minutes}m ago`)
+        }
+        else
+        {
+            time_show.push(`a few seconds ago`)
+        }
+        
+    }
+
     if(props.img && props.img.length)
     {
         for(let i=0; i<props.img.length; i++)
@@ -165,7 +210,7 @@ const Tweet = (props) => {
         <div className="tweet">
           <div className="aboveTweet">
             <div className="user" ><img  src={props.pimg === null ? profile : props.pimg} alt="profile" className="usertweetpic" />{props.user}</div>
-            <div className="tweetTime">{ Update_time.toLocaleTimeString('en-US', { hour: 'numeric',minute:'numeric', hour12: true })} · {Update_date.toLocaleDateString('en-US', {day: 'numeric',month: 'short',year: 'numeric'})}</div>
+            <div className="tweetTime">{time_show}</div>
             <Options/>
             </div>
             <div className="mainTweet">

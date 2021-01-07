@@ -32,7 +32,7 @@ export default function(state = initialState,action){
                 ...state,
                 isLoading : false,
                 data : action.payload,
-                done : 0,
+                done : -1,
             }
         default : 
         return state;

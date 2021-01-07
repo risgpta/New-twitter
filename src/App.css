@@ -67,6 +67,15 @@
   font-weight: bold;
 }
 
+.sidebarMobile{
+  margin: auto;
+  text-align: center;
+  font-size: 20px;
+  color: #0e1a47;
+  background: white;
+  border: 1px solid #0c66c2;
+}
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
@@ -77,33 +86,53 @@
   100% { transform: rotate(360deg); }
 }
 
-@media screen and (max-width:768px)
+@media screen and (max-width:996px)
 {
   .dashboard{
     display: block !important;
   }
   .sidebar{
-    height: fit-content !important;
-    display: flex !important;
-  }
-  .mobileSec{
-    display: flex;
+    display: none;
   }
   .tweetboxform{
-    width: 80vmin !important;
+    width: 200px !important;
   }
   .mainArea{
     overflow-x: hidden !important;
   }
 
-  .headerContent,.user,.tweetContent,.editbtn,.mainArea,.likes,.sidebarOptions, span,.profileEmail,.profileName,.profileUsername,.bio,.follow{
-    font-size: 13px !important;
+  .tweetbox{
+    width: auto !important;
+    margin: 10px 14px !important;
   }
-  .deletebtn,.smallbtn,.smallbtn2,.sidebarOptions,.sidebarOptions,.rightSidebar,.login,.signup{
-    font-size: 12px !important;
+  
+  .smallbtn2{
+    float: none !important;
   }
 
+  .headerContent{
+    width: 300px !important;
+    margin: auto !important;
+    padding: 0px !important;
+  }
+
+  .header{
+    padding: 25px 10px !important;
+  }
   
+  .sidebarDiv{
+    padding: 36px 5px !important;
+    border-radius: 25px !important;
+    width: 150px !important;
+    margin-right: auto !important;
+    position: absolute !important;
+    z-index: 222 !important;
+    top: 100px !important;
+    left: 24px;
+    right: 24px;
+    border: 1px solid #1ea2f1;
+    opacity: 0.95;
+  }
 
   .profilePicProfile{
     height: 100px !important;
@@ -155,7 +184,7 @@
   padding: 8px;
   border: 1px solid black;
   border-radius: 25px;
-  width: 15vmin;
+  width: 20vmin;
   background-color: #0a66c2;
   color: white;
   margin: auto;
@@ -246,7 +275,7 @@
   padding: 8px;
   border: 1px solid;
   border-radius: 25px;
-  width: 12vmin;
+  width: 20vmin;
   margin: auto;
   margin-top: 30px;
   cursor: pointer;
@@ -260,17 +289,17 @@
   height: 20px;
   display: flex;
   border: 1px solid rgb(8 62 99);
-  padding: 11px 216px;
+  padding: 25px 216px;
   padding-bottom: 40px;
 }
 .headerContent{
-  padding: 10px 108px;
-    font-size: 20px;
-    font-weight: 600;
-    color: rgb(8 62 99);
-    font-family: Avenir-Medium;
-    width: 700px;
-    text-align: center;
+  padding: 10px 88px;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(8 62 99);
+  font-family: Avenir-Medium;
+  text-align: center;
+  width: 900px;
 }
 .header > img{
   flex-basis: 15%;
@@ -416,8 +445,7 @@ scrollbar-width: none;  /* Firefox */
   padding: 8px 20px;
   border: 1px solid;
   border-radius: 25px;
-  margin: 0px 20px;
-  margin-top: 23px;
+  margin: 22px 20px;
   cursor: pointer;
   background-color: #0a66c2;
   color: white;
@@ -431,7 +459,7 @@ scrollbar-width: none;  /* Firefox */
   height: 30px;
     width: 30px;
     display: inline;
-    margin-left: 100px;
+    margin-left: 30px;
     cursor: pointer;
 }
 

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import {login,gotInfo} from '../actions/loginAction';
+import {openSnackbar} from '../actions/miscAction';
 
 import '../App.css';
 import logo from '../assets/twitter.svg'; 
@@ -54,6 +55,16 @@ function Login(props) {
       userinfo[data.name] = data.value;
     }
     console.log(userinfo);
+
+    if(userinfo.username.length === 0)
+    {
+      props.openSnackbar({
+        type : 0,
+        msg : 'Username cannot be empty',
+      })
+      return false;
+    }
+
     setLogindata(userinfo);
   }
 
@@ -96,6 +107,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (payload) => dispatch(login(payload)),
+    openSnackbar : (payload) => dispatch(openSnackbar(payload))
   };
 };
 
