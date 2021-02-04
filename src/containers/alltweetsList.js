@@ -88,7 +88,7 @@ const mapStateToProps = (state) => ({
     Loading : state.allTweetsReducer.isLoading,
     success : state.loginReducer.done, 
     update : state.tweetReducer.done,
-    load : state.miscActionReducer.load,
+    //load : state.miscActionReducer.load,
     doneLike : state.likeReducer.flag,
 })
 

@@ -757,6 +757,12 @@ scrollbar-width: none;  /* Firefox */
 .mainTweet{
   padding: 5px 0px;
 }
+.imgtag{
+  position: relative;
+  top: 32px;
+  left: 10px;
+  color: #666c75;
+}
 
 .editTweetcontent{
   display: block;
@@ -772,4 +778,71 @@ scrollbar-width: none;  /* Firefox */
 .tweetboxform{
   display: block;
   
+}
+
+.commentSection{
+  padding: 20px;
+  border-top: 1px solid grey;
+}
+.commentbox{
+  padding: 10px;
+  width: 66%;
+  font-size: 13px;
+  font-family: 'Nunito';
+  border-radius: 22px;
+  outline: none;
+}
+.replybox{
+  padding: 10px;
+  width: 76%;
+  font-size: 13px;
+  font-family: 'Nunito';
+  border-radius: 8px;
+  outline: none;
+  margin-left: 60px;
+}
+
+.comment{
+  border: 1px solid #c7d9f0;
+  padding: 10px 5px;
+  background: #c7d9f0;
+  margin: 5px 0px;
+  border-radius: 5px;
+  color: #073f63;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.commentLabel{
+  display: flex;
+  width: 100px;
+  float: right;
+  height: 43px;
+  margin-top: -24px;
+}
+
+.commentbtn{
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid #e7f0f9;
+  border-radius: 25px;
+  width: 60px;
+  background-color: #0a66c2;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  margin: 10px;
+  text-align: center;
+}
+
+.reply{
+  padding: 10px 5px;
+  background: #c7d9f06b;
+  margin: 5px 0px;
+  border-radius: 5px;
+  color: #073f63;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 60px;
 }

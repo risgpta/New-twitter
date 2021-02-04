@@ -3,12 +3,15 @@ import React,{useEffect,useState,useRef} from 'react';
 import like from '../assets/heart.svg'; 
 import profile from '../assets/person.svg'; 
 import unlike from '../assets/unlikeheart.svg'
+import cmnt from '../assets/comment.svg'
 
 import { connect } from 'react-redux';
 import {deleteTweet,updateTweet} from '../actions/tweetAction';
 import {likeTweet,fetchLikeList} from '../actions/likeAction';
 
 import '../App.css';
+import { readComment } from '../actions/commentAction';
+import Comments from './comment';
 
 const Tweet = (props) => {
     
@@ -22,9 +25,16 @@ const Tweet = (props) => {
     const [editTweetid,setEditTweetid] = useState(null);
     const [edit,setEdit] = useState(false);
 
+    const [showComment,setShowComment] = useState(false);
+
     const [imgV,setImgV] = useState(0);
 
     const [showopt,setshowopt] = useState(false);
+
+    const [comments,setComments] = useState(null);
+
+    const [users,setUsers] = useState(null);
+
 
     function deletePost(id){
         setDeleteTweetid(id);
@@ -46,6 +56,41 @@ const Tweet = (props) => {
         }
         props.likeTweet(putdata);
     }
+
+    const getComment = (id) => {
+        setShowComment(true);
+        //console.log(id);
+        props.readComment(id);
+        //props.commentTweet(id); ... need to build it....
+    }
+
+    useEffect(()=> {
+        //console.log(props.Comments);
+        if(props.Comments && props.Comments.commentDoc && props.Comments.userDoc)
+        {
+            let comment_types = new Map();
+            let user_ids = new Map();
+            for(let item of props.Comments.commentDoc)
+            {
+                if(item._id === null)
+                {
+                    comment_types['main']  = item.comments;
+                } 
+                else
+                {
+                    comment_types[item._id ]  = item.comments;
+                }
+            }
+            setComments(comment_types);
+            for(let item of props.Comments.userDoc)
+            {
+                user_ids[item._id ]  = item;
+            }
+            setUsers(user_ids);
+            //console.log(comment_types);
+            //console.log(user_ids);
+        }
+    },[props.Comments,props.DoneComments]);
 
     useEffect(()=>{
         setData({
@@ -107,6 +152,12 @@ const Tweet = (props) => {
         }
     },[props.Likelist])
 
+    useEffect(() => {
+        //props.readComment(props.id);
+        console.log(props.update);
+        console.log('working...');
+    }, [props.update]);
+
     let time = props.upd || '';   
     let date = time.split('T');
     const Update_date = new Date(date[0]);
@@ -118,17 +169,17 @@ const Tweet = (props) => {
 
     if(props.upd)
     {
-        console.log(Update_time.toLocaleTimeString());
-        console.log(Update_date.toLocaleDateString('en-US'));
+        //console.log(Update_time.toLocaleTimeString());
+        //console.log(Update_date.toLocaleDateString('en-US'));
         
         let post_day = new Date(Update_date.toLocaleDateString('en-US')+' '+Update_time.toLocaleTimeString());
-        console.log(post_day);
+        //console.log(post_day);
 
         let today = new Date();
 
         let distance = today.getTime() - post_day.getTime();
 
-        console.log(distance);
+        //console.log(distance);
 
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -221,6 +272,13 @@ const Tweet = (props) => {
                 <div className="tweetContent">{props.content}</div>
             }
             {
+                image_item.length > 1?
+                <span className="imgtag">{imgV+1}/{image_item.length}</span>
+                :
+                ''
+            
+            }
+            {
                 image_item
             }
             {
@@ -242,21 +300,21 @@ const Tweet = (props) => {
                 :
                 ''
             }
-            {/*
-                image_item.length > 1?
-                <span>{imgV+1}/{image_item.length}</span>
-                :
-                ''
-            */
-            }
             {
                 vid_item
             }
             </div>
             <div className="likes"><img  onClick={() => likePost(props.id)}  src={ props.like_flag === true ? like : unlike} alt="like" style={{height:'30px', width:'30px', display:'inline', margin:'auto',cursor:'pointer'}}/>
-            {props.likes > 0 ? props.likes+' people liked it' : 'Be the first to like this'}
-            {/*props.comm > 0 ? props.comm+' people commented on it' : 'Be the first to comment on this'*/}
+            {props.likes}
+            <img  onClick={() => getComment(props.id)}  src={cmnt} alt="like" style={{height:'30px', width:'30px', display:'inline', margin:'auto',cursor:'pointer'}}/>
+            {props.comm}
             </div>
+            {
+                showComment && 
+                <div className="commentSection">
+                <Comments tweetId={props.id} Users={users} Comments={null || comments}/>
+                </div>
+            }
         </div>
     );
 }
@@ -266,6 +324,8 @@ const Tweet = (props) => {
 const mapStateToProps = (state) => ({
     Loading : state.tweetReducer.isLoading,
     Likelist : state.likeReducer.data,
+    Comments : state.commentReducer.data,
+    update : state.commentReducer.done,
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -274,6 +334,7 @@ const mapDispatchToProps = (dispatch) => {
       updateTweet: (payload) => dispatch(updateTweet(payload)),
       likeTweet: (payload) => dispatch(likeTweet(payload)),
       fetchLikeList: (payload) => dispatch(fetchLikeList(payload)),
+      readComment: (payload) => dispatch(readComment(payload)),
     };
 };
 

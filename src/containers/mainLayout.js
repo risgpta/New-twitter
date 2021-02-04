@@ -46,11 +46,11 @@ const MainLayout = (props) => {
 const mapStateToProps = (state) => ({
     flag : state.miscActionReducer.flag,
     profile : state.miscActionReducer.profile,
-    Loading : state.tweetReducer.isLoading, 
+    //Loading : state.tweetReducer.isLoading, 
     success : state.loginReducer.done, 
-    load : state.miscActionReducer.load,
-    tweets : state.allTweetsReducer.tweets,
-    update : state.tweetReducer.done, 
+    //load : state.miscActionReducer.load,
+    //tweets : state.allTweetsReducer.tweets,
+    //update : state.tweetReducer.done, 
     data: state.loginReducer.data, 
 });
   
